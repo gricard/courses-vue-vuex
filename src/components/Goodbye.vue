@@ -1,5 +1,5 @@
 <template>
-    <div class="hello">
+    <div class="goodbye">
         <h1>{{ msg }}</h1>
         <h3>Location: {{ $route.path }}</h3>
     </div>
@@ -8,10 +8,10 @@
 <script>
 
     export default {
-        name: 'Hello',
+        name: 'Goodbye',
         data () {
             return {
-                msg: 'Hello Vue!'
+                msg: 'Buh bye Vue!'
             }
         }
     }
