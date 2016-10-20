@@ -16,7 +16,6 @@ import store from './vuex/store';
 // link store & router
 // this requires vuex-router-sync v3.0.x or greater
 sync(store, router);
-// TODO not working yet
 
 //Vue.config.silent = false;
 //Vue.config.devtools = true;
