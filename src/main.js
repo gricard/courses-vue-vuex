@@ -2,6 +2,16 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 
+import Vuex from 'vuex';
+import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
+import { sync } from 'vuex-router-sync'
+
+Vue.use(Vuex);
+Vue.use(VueResource);
+Vue.use(VueRouter);
+
+// custom components and pages
 import Hello from './components/Hello.vue'
 import Goodbye from './components/Goodbye.vue'
 import CoursesPage from './components/CoursesPage.vue'
@@ -9,15 +19,20 @@ import ManageCoursePage from './components/ManageCoursePage.vue'
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 
-import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
+// setup store
+const store = new Vuex.Store({
+    state: {
+        count: 0
+    },
+    mutations: {
+        increment (state) {
+            state.count++
+        }
+    }
+});
 
-// We want to apply VueResource and VueRouter
-// to our Vue instance
-Vue.use(VueResource);
-Vue.use(VueRouter);
 
-
+// setup router
 const routes = [
     { path: '/courses', component: CoursesPage },
     {
@@ -37,9 +52,15 @@ const router = new VueRouter({
     linkActiveClass: 'active'
 });
 
+
+// link store & router
+//sync(store, router);
+// TODO not working yet
+
 //Vue.config.silent = false;
 //Vue.config.devtools = true;
 
+// setup application and start it
 let app = new Vue({
     router: router,
     components: {
