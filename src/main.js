@@ -2,6 +2,9 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 
+//Vue.config.silent = false;
+Vue.config.devtools = true;
+
 import VueResource from 'vue-resource'
 import { sync } from 'vuex-router-sync'
 
@@ -17,12 +20,11 @@ import store from './vuex/store';
 // this requires vuex-router-sync v3.0.x or greater
 sync(store, router);
 
-//Vue.config.silent = false;
-//Vue.config.devtools = true;
 
 // setup application and start it
 let app = new Vue({
-    router: router,
+    store,
+    router,
     components: {
         'site-header': Header
     }
