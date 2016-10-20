@@ -5,6 +5,7 @@ import Vue from 'vue'
 import Hello from './components/Hello.vue'
 import Goodbye from './components/Goodbye.vue'
 import CoursesPage from './components/CoursesPage.vue'
+import ManageCoursePage from './components/ManageCoursePage.vue'
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 
@@ -19,6 +20,11 @@ Vue.use(VueRouter);
 
 const routes = [
     { path: '/courses', component: CoursesPage },
+    {
+        path: '/course/:id',
+        name: 'course',
+        component: ManageCoursePage
+    },
     { path: '/hello', component: Hello, name: 'hi' },
     { path: '/bye', component: Goodbye, name: 'bye' },
     { path: '/', component: HomePage, name: 'home' },

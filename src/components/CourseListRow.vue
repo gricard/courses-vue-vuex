@@ -2,8 +2,8 @@
     <tr>
         <td><a :href="watchHref" target="_blank">Watch</a></td>
         <td>
-            {{course.title}}
-            <!--<Link to={'/course/' + course.id}>{course.title}</Link>-->
+            <!--<a :href="courseLink" target="_blank">{{course.title}}</a>-->
+            <router-link :to="{ name: 'course', params: { id: course.id }}">{{course.title}}</router-link>
         </td>
         <td>{{authorName}}</td>
         <td>{{course.category}}</td>
