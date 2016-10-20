@@ -54,8 +54,8 @@
 </template>
 
 <script>
-    import TextInput from './TextInput';
-    import SelectInput from './SelectInput';
+    import TextInput from './common/TextInput';
+    import SelectInput from './common/SelectInput';
 
     export default {
         name: 'CourseForm',

@@ -8,7 +8,7 @@ import { sync } from 'vuex-router-sync'
 Vue.use(VueResource);
 
 // custom components used by index page
-import Header from './components/Header';
+import Header from './components/common/Header';
 
 import router from './router';
 import store from './vuex/store';
