@@ -7,30 +7,29 @@
                 class="form-control"
                 :name="getName"
                 :placeholder="getPlaceholder"
-                :value="getValue" >
-                <!--@keyup=onChange />-->
+                :value="getValue"
+                @input="updateValue($event.target.value)"
+            >
+            <!--@change updates after blur , @input is on keyup-->
+
             <div v-if="error" class="alert alert-danger">{{error}}</div>
         </div>
     </div>
 </template>
 
 <script>
+
     export default {
         name: 'TextInput',
 
-        data () {
-            return {
-                message: 'Hello'
-            };
-        },
-
+        // props down, events up
+        // get these props from parent
         props: {
             label: String,
             wrapperClass: String,
             fieldName: String,
             placeholder: String,
             value: String,
-            onChange: String,
             error: String
         },
 
@@ -48,9 +47,18 @@
                 return this.value;
             }
         },
+
+        methods: {
+            // send events up
+            // new value goes back up to parent component
+            // parent component can use @textchange="handlerFunc" to get this
+            updateValue: function (value) {
+                this.$emit('textchange', value)
+            }
+        }
+
     }
 </script>
 
 <style>
-
 </style>
