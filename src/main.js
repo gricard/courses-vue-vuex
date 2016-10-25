@@ -23,7 +23,9 @@ sync(store, router);
 // register global components
 // import TextInput...
 import TextInput from './components/common/TextInput';
+import SelectInput from './components/common/SelectInput';
 Vue.component('TextInput', TextInput);
+Vue.component('SelectInput', SelectInput);
 
 
 // setup application and start it

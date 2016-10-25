@@ -62,7 +62,7 @@
 
         <!--
 
-                <select-input
+                <SelectInput
                     name="authorId"
                     label="Author"
                     value={course.authorId}
@@ -75,7 +75,7 @@
 </template>
 
 <script>
-    import SelectInput from './common/SelectInput';
+//    import SelectInput from './common/SelectInput';
 
     import { mapMutations } from 'vuex'
 
@@ -88,7 +88,7 @@
         },
 
         components: {
-            'select-input': SelectInput
+//            'SelectInput': SelectInput
         },
 
         beforeMount() {
