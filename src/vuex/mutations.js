@@ -13,6 +13,11 @@ export const mutations = {
         state.name = name;
     },
 
+    changeTitle (state, title) {
+        console.log('set new title', title);
+        state.title = title;
+    },
+
     loadCourse (state, course) {
         console.log('loadCourse', course);
         state.course = course;
