@@ -20,6 +20,11 @@ import store from './vuex/store';
 // this requires vuex-router-sync v3.0.x or greater
 sync(store, router);
 
+// register global components
+// import TextInput...
+import TextInput from './components/common/TextInput';
+Vue.component('TextInput', TextInput);
+
 
 // setup application and start it
 let app = new Vue({
