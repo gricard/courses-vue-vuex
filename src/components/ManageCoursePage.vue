@@ -1,7 +1,7 @@
 <template>
     <div>
-        <course-form :course="course" :errors="errors"></course-form>
-        <!--<h1>Manage Course</h1>-->
+        <CourseForm :course="course" :errors="errors"></CourseForm>
+
         <!--<CourseForm-->
             <!--allAuthors={this.props.authors}-->
             <!--onChange={this.handleUpdateCourseState}-->
@@ -22,32 +22,46 @@
     export default {
         name: 'ManageCoursePage',
 
-        props: {
-//            course: Object
-        },
+        props: [
+            'id'
+        ],
 
         components: {
-            'course-form': CourseForm
+            CourseForm
         },
 
-        data () {
-            return {
-                course: { id: 1, title: 'foo', author: 'bob', watchHref: 'http://google.com', timeLength: '2:00', category: 'code' }
-            };
+        beforeMount () {
+            console.log('loading course id', this.$route.params.id);
+//            this.$store.dispatch('FETCH_COURSE', {
+//                ids: [this.id]
+//            });
         },
+
+//        data () {
+//            return {
+//                course: { id: 1, title: 'foo', author: 'bob', watchHref: 'http://google.com', timeLength: '2:00', category: 'code' }
+//            };
+//        },
 
         methods: {
             addCourse() {
                 console.log('add course!');
 
+            },
+            doStuff() {
+                console.log('store', this.$store);
             }
         },
 
         computed: {
-            errors: function() {
-                return {
-                    title: ''
-                };
+            errors () {
+                return this.$store.state.errors;
+            },
+
+            course () {
+                let course = this.$store.state.courses[this.$route.params.id]
+                console.log('course loaded', course);
+                return course;
             }
         }
     }
