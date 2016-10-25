@@ -7,7 +7,7 @@
             @click="addCourse()"
         />
 
-        <course-list :courses="courses"></course-list>
+        <CourseList :courses="courses" :errors="errors"></CourseList>
     </div>
 </template>
 
@@ -17,14 +17,16 @@
 
     export default {
         name: 'CoursesPage',
+
         components: {
-            'course-list': CourseList
+            'CourseList': CourseList
         },
+
         data () {
             return {
                 courses: [
-                    { id: 1, title: 'foo', author: 'bob', watchHref: 'http://google.com', timeLength: '2:00', category: 'code' },
-                    { id: 2, title: 'bar', author: 'jim', watchHref: 'http://goo.gl', timeLength: '1:10', category: 'db' }
+                    { id: 1, title: 'foo', author: 'bob', watchHref: 'http://google.com', length: '2:00', category: 'code' },
+                    { id: 2, title: 'bar', author: 'jim', watchHref: 'http://goo.gl', length: '1:10', category: 'db' }
                 ]
             };
         },
