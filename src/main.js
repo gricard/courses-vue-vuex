@@ -35,6 +35,8 @@ let app = new Vue({
 
     created() {
         console.log('app created');
+        // TODO there's still a race condition where these aren't loaded fast enough before they're needed
+        // TODO need to somehow delay rendering of the page until we have this data
         this.$store.dispatch('LOAD_COURSES');
         this.$store.dispatch('LOAD_AUTHORS');
     },
