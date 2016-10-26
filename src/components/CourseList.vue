@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody >
-            <CourseListRow v-for="course in courses" :course="course" :key="course.id" />
+            <CourseListRow v-for="course in courses" :course="course" :key="course.id" :authors="authors" />
         </tbody>
     </table>
 </template>
@@ -26,7 +26,8 @@
         },
 
         props: {
-            courses: [Object, Array]
+            courses: [Object, Array], // TODO fix this, it should only be an array!
+            authors: [Object, Array]
         },
 
         methods: {

@@ -7,7 +7,7 @@
             @click="addCourse()"
         />
 
-        <CourseList :courses="courses" :errors="errors"></CourseList>
+        <CourseList :courses="courses" :authors="authors" :errors="errors"></CourseList>
     </div>
 </template>
 
@@ -34,6 +34,10 @@
         computed: {
             courses() {
                 return this.$store.state.courses;
+            },
+
+            authors() {
+                return this.$store.state.authors;
             },
 
             errors() {

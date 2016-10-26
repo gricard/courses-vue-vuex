@@ -16,12 +16,16 @@
 
         props: {
             course: Object,
-            key: String
+            key: String,
+            authors: [Array, Object] // TODO Fixme
         },
 
         computed: {
+            // TODO add error checks
             authorName: function() {
-                return this.course.authorId;
+                const authors = Array.from(this.authors),
+                    author = authors.filter(author => author.id === this.course.authorId)[0];
+                return author.firstName + ' ' + author.lastName;
             },
 
             watchHref: function() {
