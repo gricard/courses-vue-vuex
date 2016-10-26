@@ -1,5 +1,5 @@
 import CourseApi  from '../api/mockCourseApi'
-
+import Vue from 'vue';
 
 export const actions = {
     // ensure data for rendering given list type
@@ -32,4 +32,25 @@ export const actions = {
             throw(error);
         });
     },
+
+    FETCH_COURSE: ({ commit, dispatch, state }, { id }) => {
+        const courses = Array.from(state.courses);
+
+        // ensure we have data load if we load the course page directly
+        if (courses.length < 1) {
+            return dispatch('LOAD_COURSES').then(something => {
+                dispatch('FETCH_COURSE', { id: id });
+            });
+        }
+
+        // get course from list we already retrieved
+        let course = courses.filter(course => course.id == id).pop();
+
+        // clone it so it's not a reference
+        // so that when we edit the form we are not editing the course in the course list also
+        course = Vue.util.extend({}, course);
+
+        // set the state
+        commit('SET_COURSE', { course });
+    }
 };

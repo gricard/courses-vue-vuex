@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody >
-            <course-list-row v-for="course in courses" :course="course" :key="course.id" />
+            <CourseListRow v-for="course in courses" :course="course" :key="course.id" />
         </tbody>
     </table>
 </template>
@@ -22,11 +22,11 @@
         name: 'CourseList',
 
         components: {
-            'course-list-row': CourseListRow
+            'CourseListRow': CourseListRow
         },
 
         props: {
-            courses: Array
+            courses: [Object, Array]
         },
 
         methods: {
