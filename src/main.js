@@ -30,20 +30,18 @@ Vue.component('SelectInput', SelectInput);
 
 // setup application and start it
 let app = new Vue({
-    store,
-    router,
-
-    created() {
-        console.log('app created');
-        // TODO there's still a race condition where these aren't loaded fast enough before they're needed
-        // TODO need to somehow delay rendering of the page until we have this data
-        this.$store.dispatch('LOAD_COURSES');
-        this.$store.dispatch('LOAD_AUTHORS');
-    },
+    store, router,
 
     components: {
         'siteheader': Header // TODO why does the key have to be lowercase here?
     }
-}).$mount('#app');
+});
 
-console.log('app started');
+// use promises to execute load actions before mounting the app
+console.log('start loading data');
+store.dispatch('LOAD_COURSES').then(nothing =>
+    store.dispatch('LOAD_AUTHORS').then( nothing2 => {
+        app.$mount('#app');
+        console.log('app started');
+    })
+);
