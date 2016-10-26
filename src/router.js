@@ -4,8 +4,6 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 // custom components and pages
-import Hello from './components/Hello.vue'
-import Goodbye from './components/Goodbye.vue'
 import CoursesPage from './components/CoursesPage.vue'
 import ManageCoursePage from './components/ManageCoursePage.vue'
 import HomePage from './components/HomePage';
@@ -19,10 +17,10 @@ const routes = [
         name: 'course',
         component: ManageCoursePage
     },
-    { path: '/hello', component: Hello, name: 'hi' },
-    { path: '/bye', component: Goodbye, name: 'bye' },
+    { path: '/authors', component: HomePage, name: 'home' }, // TODO fixme
+    { path: '/about', component: HomePage, name: 'home' },
     { path: '/', component: HomePage, name: 'home' },
-    { path: '*', redirect: '/hello' }
+    { path: '*', redirect: '/' }
 ];
 
 const router = new VueRouter({

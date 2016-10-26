@@ -8,10 +8,6 @@
             <router-link to="/authors">Authors</router-link>
             |
             <router-link to="/about">About</router-link>
-            |
-            <router-link :to="{name:'bye'}">Goodbye</router-link>
-            |
-            <router-link :to="{name:'hi'}">Hello</router-link>
 
             <!--{loading && <LoadingDots interval={100} dots={20} />}-->
         </nav>

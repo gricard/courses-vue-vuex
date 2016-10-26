@@ -1,13 +1,13 @@
 <template>
     <div :class="getWrapperClass">
-        <label :for="getName">{{label}}</label>
+        <label :for="fieldName">{{label}}</label>
         <div class="field">
             <input
                 type="text"
                 class="form-control"
-                :name="getName"
-                :placeholder="getPlaceholder"
-                :value="getValue"
+                :name="fieldName"
+                :placeholder="placeholder"
+                :value="value"
                 @input="updateValue($event.target.value)"
             >
             <!--@change updates after blur , @input is on keyup-->
@@ -37,12 +37,15 @@
             getWrapperClass: function() {
                 return this.wrapperClass;
             },
+
             getName: function() {
                 return this.fieldName;
             },
+
             getPlaceholder: function() {
                 return this.placeholder;
             },
+
             getValue: function() {
                 return this.value;
             }

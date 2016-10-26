@@ -24,12 +24,6 @@
     export default {
         name: 'SelectInput',
 
-        data () {
-            return {
-                message: 'Hello'
-            };
-        },
-
         props: {
             label: String,
             wrapperClass: String,
@@ -43,12 +37,15 @@
             wrapperClass: function() {
                 return this.wrapperClass;
             },
+
             labelFor: function() {
                 return this.fieldName;
             },
+
             getName: function() {
                 return this.fieldName;
             },
+
             getValue: function() {
                 return this.value;
             }
