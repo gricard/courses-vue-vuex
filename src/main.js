@@ -32,6 +32,13 @@ Vue.component('SelectInput', SelectInput);
 let app = new Vue({
     store,
     router,
+
+    created() {
+        console.log('app created');
+        this.$store.dispatch('LOAD_COURSES');
+//        this.$store.dispatch('LOAD_AUTHORS');
+    },
+
     components: {
         'siteheader': Header // TODO why does the key have to be lowercase here?
     }

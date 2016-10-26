@@ -43,7 +43,7 @@
 
         beforeMount() {
             // load course list
-            this.$store.dispatch('LOAD_COURSES');
+//            this.$store.dispatch('LOAD_COURSES');
         },
 
         methods: {
