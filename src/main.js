@@ -33,7 +33,7 @@ let app = new Vue({
     store,
     router,
     components: {
-        'site-header': Header
+        'siteheader': Header // TODO why does the key have to be lowercase here?
     }
 }).$mount('#app');
 
