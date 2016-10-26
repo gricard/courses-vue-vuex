@@ -17,6 +17,7 @@ import router from './router';
 import store from './vuex/store';
 
 // link store & router
+// creates this.$store.route
 // this requires vuex-router-sync v3.0.x or greater
 sync(store, router);
 
