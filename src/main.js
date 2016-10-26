@@ -14,7 +14,7 @@ Vue.use(VueResource);
 import Header from './components/common/Header';
 
 import router from './router';
-import store from './vuex/store';
+import store from './store/store';
 
 // link store & router
 // creates this.$store.route
