@@ -16,6 +16,10 @@ export const mutations = {
         state.course = course;
     },
 
+    SET_AUTHORS (state, { authors }) {
+        state.authors = authors;
+    },
+
     changeName (state, name) {
         console.log('set new name', name);
         state.course.name = name;

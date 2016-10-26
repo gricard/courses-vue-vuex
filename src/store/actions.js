@@ -1,5 +1,6 @@
-import CourseApi  from '../api/mockCourseApi'
 import Vue from 'vue';
+import CourseApi  from '../api/mockCourseApi'
+import AuthorApi  from '../api/mockAuthorApi'
 
 export const actions = {
     // ensure data for rendering given list type
@@ -52,5 +53,16 @@ export const actions = {
 
         // set the state
         commit('SET_COURSE', { course });
+    },
+
+
+    LOAD_AUTHORS: ({ commit, dispatch, state }) => {
+        //        dispatch('AJAX_BEGIN'); // increment ajax call count
+        return AuthorApi.getAllAuthors().then(authors => {
+            commit('SET_AUTHORS', { authors });
+            //            dispatch('AJAX_SUCCESS');
+        }).catch(error => {
+            throw(error);
+        });
     }
 };

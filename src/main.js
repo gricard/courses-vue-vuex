@@ -36,7 +36,7 @@ let app = new Vue({
     created() {
         console.log('app created');
         this.$store.dispatch('LOAD_COURSES');
-//        this.$store.dispatch('LOAD_AUTHORS');
+        this.$store.dispatch('LOAD_AUTHORS');
     },
 
     components: {
