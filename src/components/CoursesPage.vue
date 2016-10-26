@@ -21,15 +21,31 @@
         components: {
             'CourseList': CourseList
         },
+//
+//        data () {
+//            return {
+//                courses: [
+//                    { id: 1, title: 'foo', author: 'bob', watchHref: 'http://google.com', length: '2:00', category: 'code' },
+//                    { id: 2, title: 'bar', author: 'jim', watchHref: 'http://goo.gl', length: '1:10', category: 'db' }
+//                ]
+//            };
+//        },
 
-        data () {
-            return {
-                courses: [
-                    { id: 1, title: 'foo', author: 'bob', watchHref: 'http://google.com', length: '2:00', category: 'code' },
-                    { id: 2, title: 'bar', author: 'jim', watchHref: 'http://goo.gl', length: '1:10', category: 'db' }
-                ]
-            };
+        computed: {
+            courses() {
+                return this.$store.state.courses;
+            },
+
+            errors() {
+                return this.$store.state.errors;
+            }
         },
+
+        beforeMount() {
+            // load course list
+            this.$store.dispatch('LOAD_COURSES');
+        },
+
         methods: {
             addCourse() {
                 console.log('add course!');

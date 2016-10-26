@@ -8,6 +8,10 @@
 
 export const mutations = {
 
+    SET_COURSES (state, { courses }) {
+        state.courses = courses;
+    },
+
     changeName (state, name) {
         console.log('set new name', name);
         state.name = name;

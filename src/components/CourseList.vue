@@ -9,8 +9,8 @@
                 <th>Length</th>
             </tr>
         </thead>
-        <tbody v-for="course in courses">
-            <course-list-row :course="course" />
+        <tbody >
+            <course-list-row v-for="course in courses" :course="course" :key="course.id" />
         </tbody>
     </table>
 </template>
@@ -20,12 +20,15 @@
 
     export default {
         name: 'CourseList',
+
         components: {
             'course-list-row': CourseListRow
         },
+
         props: {
             courses: Array
         },
+
         methods: {
             dumb() {
                 console.log('dumb');
