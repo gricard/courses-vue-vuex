@@ -1,6 +1,6 @@
 <template>
     <tr>
-        <td><a :href="watchHref" target="_blank">Watch</a></td>
+        <td><a :href="course.watchHref" target="_blank">Watch</a></td>
         <td>
             <router-link :to="{ name: 'course', params: { id: course.id }}">{{course.title}}</router-link>
         </td>
@@ -26,10 +26,6 @@
                 const authors = Array.from(this.authors),
                     author = authors.filter(author => author.id === this.course.authorId)[0];
                 return author.firstName + ' ' + author.lastName;
-            },
-
-            watchHref: function() {
-                return this.course.watchHref;
             }
         },
 
