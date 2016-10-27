@@ -76,6 +76,22 @@ export const actions = {
         commit('SET_COURSE', { course });
     },
 
+    SAVE_COURSE: ({ commit, dispatch, state }, course) => {
+        dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
+        return CourseApi.saveCourse(course).then(course => {
+//            course.id ? dispatch('UPDATE_COURSE_SUCCESS') : dispatch('CREATE_COURSE_SUCCESS');
+            commit('SET_COURSE', { course });
+            dispatch('AJAX_CALL_SUCCESS');
+
+            // replace in course list?
+//            course.id ? dispatch(updateCourseSuccess(course)) : dispatch(createCourseSuccess(course));
+        }).catch(error => {
+            //            throw(error);
+//            dispatch(ajaxCallError(error));
+            dispatch('AJAX_CALL_ERROR');
+        });
+    },
+
 
     LOAD_AUTHORS: ({ commit, dispatch, state }) => {
         //        dispatch('AJAX_BEGIN'); // increment ajax call count

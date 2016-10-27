@@ -42,6 +42,11 @@ export const mutations = {
         state.course.title = title;
     },
 
+    changeLength (state, length) {
+        console.log('set new length', length);
+        state.course.length = length;
+    },
+
     changeCategory (state, newVal) {
         console.log('set new cateogry', newVal);
         state.course.category = newVal;

@@ -63,7 +63,7 @@
 <script>
 //    import SelectInput from './common/SelectInput';
 
-    import { mapMutations } from 'vuex'
+//    import { mapMutations } from 'vuex'
 
     export default {
         name: 'CourseForm',
@@ -74,16 +74,16 @@
             allAuthors: Array,
             changeAuthor: Function
         },
-
-        components: {
-//            'SelectInput': SelectInput
-        },
+//
+//        components: {
+////            'SelectInput': SelectInput
+//        },
 
         beforeMount() {
-//            if (!this.$store.state.course.id || (this.course && this.$store.state.course && this.course.id != this.$store.state.course.id)) {
-//                console.log('loading course', this.course)
+            if (!this.$store.state.course.id || (this.course && this.$store.state.course && this.course.id != this.$store.state.course.id)) {
+                console.log('loading course', this.course)
                 this.$store.commit('loadCourse', this.course);
-//            }
+            }
         },
 
         computed: {
@@ -119,8 +119,9 @@
                 this.$store.commit('changeLength', name);
             },
 
-            onSave() {
-                console.log('onSave', arguments);
+            onSave(event) {
+                console.log('onSave', this.course);
+                this.$store.dispatch('SAVE_COURSE', this.course);
             }
         }
     };
