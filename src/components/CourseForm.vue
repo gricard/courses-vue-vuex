@@ -34,7 +34,7 @@
             :value="course.authorId"
             defaultOption="Select Author"
             :options="allAuthors"
-            @menuchange="changeAuthor"
+            @menuchange="authorChanged"
             :error="errors.authorId" />
 
         <br>
@@ -57,23 +57,6 @@
             @click.prevent="onDelete"
         />
 
-
-        <div>
-            <br>
-            <button class="btn"
-                @click.prevent="doStuff">
-                Do a thing
-            </button>
-        </div>
-
-
-
-
-
-        <!--
-
-
-                    -->
     </form>
 </template>
 
@@ -88,7 +71,8 @@
         props: {
             course: Object,
             errors: Object,
-            allAuthors: Array
+            allAuthors: Array,
+            changeAuthor: Function
         },
 
         components: {
@@ -113,13 +97,6 @@
         },
 
         methods: {
-            doStuff () {
-                console.log('do stuff', arguments);
-                this.$store.commit('changeName', 'NEW NAME');
-                this.course.title = 'NEW NAME';
-                this.$store.dispatch('DUMP_STATE');
-            },
-
 
             // TODO THESE NEED TO BE DISPATCHING EVENTS, NOT COMMITTING MUTATIONS!
 
@@ -142,14 +119,14 @@
                 this.$store.commit('changeLength', name);
             },
 
-            changeAuthor(authorId) {
-                console.log('changeAuthor' , authorId);
-                this.course.authorId = authorId;
-                this.$store.commit('changeAuthor', authorId);
-            },
-
             onSave() {
                 console.log('onSave', arguments);
+            },
+
+            authorChanged(author) {
+                console.log('authorChanged', arguments);
+                console.log('handler', this.changeAuthor);
+                this.changeAuthor(author);
             }
         }
     };

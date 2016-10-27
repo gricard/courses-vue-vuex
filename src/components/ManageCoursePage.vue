@@ -4,6 +4,7 @@
             :course="course"
             :errors="errors"
             :allAuthors="authors"
+            :changeAuthor="changeAuthor"
         />
 
         <!--<CourseForm-->
@@ -55,7 +56,13 @@
 
             doStuff() {
                 console.log('store', this.$store);
-            }
+            },
+
+            changeAuthor(authorId) {
+                console.log('changeAuthor' , authorId);
+                this.course.authorId = authorId;
+                this.$store.commit('changeAuthor', authorId);
+            },
         },
 
         computed: {
