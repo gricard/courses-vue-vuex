@@ -34,7 +34,7 @@
             :value="course.authorId"
             defaultOption="Select Author"
             :options="allAuthors"
-            @menuchange="authorChanged"
+            @menuchange="this.changeAuthor"
             :error="errors.authorId" />
 
         <br>
@@ -121,12 +121,6 @@
 
             onSave() {
                 console.log('onSave', arguments);
-            },
-
-            authorChanged(author) {
-                console.log('authorChanged', arguments);
-                console.log('handler', this.changeAuthor);
-                this.changeAuthor(author);
             }
         }
     };
