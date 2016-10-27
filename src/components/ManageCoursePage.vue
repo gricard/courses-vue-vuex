@@ -1,6 +1,10 @@
 <template>
     <div>
-        <CourseForm :course="course" :errors="errors"></CourseForm>
+        <CourseForm
+            :course="course"
+            :errors="errors"
+            :allAuthors="authors"
+        />
 
         <!--<CourseForm-->
             <!--allAuthors={this.props.authors}-->
@@ -61,6 +65,17 @@
 
             course () {
                 return this.$store.state.course;
+            },
+
+            authors() {
+                console.log('got authors for course form', this.$store.state.authors);
+                const authorList = Array.from(this.$store.state.authors);
+                return authorList.map(author => {
+                    return {
+                        value: author.id,
+                        text: author.firstName + ' ' + author.lastName
+                    };
+                });
             }
         }
     }

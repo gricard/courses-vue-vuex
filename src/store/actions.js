@@ -12,7 +12,6 @@ export const actions = {
     //    }
 
     BEGIN_AJAX_CALL: ({ commit, dispatch, state }) => {
-        console.log('ajaxCalls++');
         // loading mask?
         commit('INCREMENT_AJAX_CALLS');
     },

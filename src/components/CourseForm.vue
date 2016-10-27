@@ -27,6 +27,16 @@
             @textchange=changeLength
         />
 
+
+        <SelectInput
+            name="authorId"
+            label="Author"
+            :value="course.authorId"
+            defaultOption="Select Author"
+            :options="allAuthors"
+            @menuchange="changeAuthor"
+            :error="errors.authorId" />
+
         <br>
 
         <input
@@ -62,13 +72,6 @@
 
         <!--
 
-                <SelectInput
-                    name="authorId"
-                    label="Author"
-                    value={course.authorId}
-                    defaultOption="Select Author"
-                    options={allAuthors}
-                    onChange={onChange} error={errors.authorId}/>
 
                     -->
     </form>
@@ -84,7 +87,8 @@
 
         props: {
             course: Object,
-            errors: Object
+            errors: Object,
+            allAuthors: Array
         },
 
         components: {
@@ -106,7 +110,6 @@
             deleting() {
                 return this.$store.state.deleting;
             }
-
         },
 
         methods: {
@@ -116,6 +119,9 @@
                 this.course.title = 'NEW NAME';
                 this.$store.dispatch('DUMP_STATE');
             },
+
+
+            // TODO THESE NEED TO BE DISPATCHING EVENTS, NOT COMMITTING MUTATIONS!
 
             // catch the textchange event for the title field and update it
             changeTitle(title) {
@@ -129,10 +135,17 @@
                 this.course.category = name;
                 this.$store.commit('changeCategory', name);
             },
+
             changeLength(name) {
                 console.log('changeLength' , name);
                 this.course.category = name;
                 this.$store.commit('changeLength', name);
+            },
+
+            changeAuthor(authorId) {
+                console.log('changeAuthor' , authorId);
+                this.course.authorId = authorId;
+                this.$store.commit('changeAuthor', authorId);
             },
 
             onSave() {

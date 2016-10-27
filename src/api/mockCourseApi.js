@@ -40,7 +40,7 @@ const courses = [
     id: "web-components-shadow-dom",
     title: "Web Component Fundamentals",
     watchHref: "http://www.pluralsight.com/courses/web-components-shadow-dom",
-    authorId: "cory-house",
+    authorId: "scott-allen",
     length: "5:10",
     category: "HTML5"
   }

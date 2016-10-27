@@ -47,6 +47,11 @@ export const mutations = {
         state.course.category = newVal;
     },
 
+    changeAuthor(state, newVal) {
+        console.log('set new author', newVal);
+        state.course.authorId = newVal;
+    },
+
     loadCourse (state, course) {
 //        console.log('loadCourse', course);
         state.course = course;
