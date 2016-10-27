@@ -9,14 +9,27 @@
             |
             <router-link to="/about">About</router-link>
 
-            <!--{loading && <LoadingDots interval={100} dots={20} />}-->
+            <LoadingDots v-if="loading" interval=100 dots=20 />
         </nav>
     </div>
 </template>
 
 <script>
+    import LoadingDots from './LoadingDots'
+
     export default {
-        name: 'Header'
+        name: 'Header',
+
+        components: {
+            'LoadingDots': LoadingDots
+        },
+
+        computed: {
+            loading: function() {
+                return this.$store.state.ajaxCallsInProgress > 0;
+            },
+
+        }
     }
 </script>
 

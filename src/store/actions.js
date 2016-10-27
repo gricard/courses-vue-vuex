@@ -11,6 +11,27 @@ export const actions = {
     //            .then(() => dispatch('ENSURE_ACTIVE_ITEMS'))
     //    }
 
+    BEGIN_AJAX_CALL: ({ commit, dispatch, state }) => {
+        console.log('ajaxCalls++');
+        // loading mask?
+        commit('INCREMENT_AJAX_CALLS');
+    },
+
+    AJAX_CALL_SUCCESS: ({ commit, dispatch, state }) => {
+        // clear loading mask?
+        commit('DECREMENT_AJAX_CALLS');
+    },
+
+    AJAX_CALL_ERROR: ({ commit, dispatch, state }) => {
+        // clear loading mask?
+        // display error?
+        commit('DECREMENT_AJAX_CALLS');
+    },
+
+    UPDATE_LOADING_FRAME: ({ commit, dispatch, state }, {frame: frame}) => {
+        commit('SET_LOADING_FRAME', {frame: frame});
+    },
+
     DUMP_STATE: ({ commit, dispatch, state }) => {
         //        commit('SET_ACTIVE_TYPE', {type});
         console.log('DUMP_STATE', state);
@@ -25,11 +46,12 @@ export const actions = {
 //            return Promise.resolve()
 //        }
 
-//        dispatch('AJAX_BEGIN'); // increment ajax call count
+        dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
         return CourseApi.getAllCourses().then(courses => {
             commit('SET_COURSES', { courses });
-//            dispatch('AJAX_SUCCESS');
+            dispatch('AJAX_CALL_SUCCESS');
         }).catch(error => {
+            dispatch('AJAX_CALL_ERROR');
             throw(error);
         });
     },

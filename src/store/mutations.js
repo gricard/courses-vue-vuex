@@ -20,6 +20,18 @@ export const mutations = {
         state.authors = authors;
     },
 
+    INCREMENT_AJAX_CALLS (state) {
+        state.ajaxCallsInProgress++;
+    },
+
+    DECREMENT_AJAX_CALLS (state) {
+        state.ajaxCallsInProgress--;
+    },
+
+    SET_LOADING_FRAME (state, { frame }) {
+        state.loadingFrame = frame;
+    },
+
     changeName (state, name) {
         console.log('set new name', name);
         state.course.name = name;
