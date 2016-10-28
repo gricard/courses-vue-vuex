@@ -12,6 +12,7 @@ import HomePage from './components/HomePage';
 // setup router
 const routes = [
     { path: '/courses', component: CoursesPage },
+    { path: '/course', component: ManageCoursePage },
     {
         path: '/course/:id',
         name: 'course',

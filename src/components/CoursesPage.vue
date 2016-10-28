@@ -1,11 +1,8 @@
 <template>
     <div>
         <h1>Courses</h1>
-        <input type="submit"
-            value="Add Course"
-            class="btn btn-primary"
-            @click="addCourse()"
-        />
+
+        <router-link to="/course" class="btn btn-primary">Add Course</router-link>
 
         <CourseList :courses="courses" :authors="authors" :errors="errors"></CourseList>
     </div>

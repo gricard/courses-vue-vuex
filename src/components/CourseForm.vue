@@ -98,6 +98,10 @@
 
         methods: {
 
+            // mapMutations could be used here
+            // change these to dispatch actions instead
+            // unify state of this form in the store instead of storing in both places
+
             // TODO THESE NEED TO BE DISPATCHING EVENTS, NOT COMMITTING MUTATIONS!
 
             // catch the textchange event for the title field and update it
@@ -113,10 +117,10 @@
                 this.$store.commit('changeCategory', name);
             },
 
-            changeLength(name) {
-                console.log('changeLength' , name);
-                this.course.category = name;
-                this.$store.commit('changeLength', name);
+            changeLength(val) {
+                console.log('changeLength' , val);
+                this.course.length = val;
+                this.$store.commit('changeLength', val);
             },
 
             onSave(event) {
