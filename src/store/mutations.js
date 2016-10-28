@@ -32,6 +32,10 @@ export const mutations = {
         state.loadingFrame = frame;
     },
 
+    SET_SAVING (state, saving) {
+        state.saving = saving;
+    },
+
     changeName (state, name) {
         console.log('set new name', name);
         state.course.name = name;
