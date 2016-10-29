@@ -36,6 +36,10 @@ export const mutations = {
         state.saving = saving;
     },
 
+    SET_DELETING (state, deleting) {
+        state.deleting = deleting;
+    },
+
     changeName (state, name) {
         console.log('set new name', name);
         state.course.name = name;

@@ -97,6 +97,9 @@ export const actions = {
         });
     },
 
+    DELETE_COURSE: ({ commit, dispatch, state }, course) => {
+        return CourseApi.deleteCourse(course);
+    },
 
     LOAD_AUTHORS: ({ commit, dispatch, state }) => {
         //        dispatch('AJAX_BEGIN'); // increment ajax call count

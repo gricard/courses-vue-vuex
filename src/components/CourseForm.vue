@@ -126,6 +126,22 @@
             onSave(event) {
                 console.log('onSave', this.course);
                 this.$store.dispatch('SAVE_COURSE', this.course);
+            },
+
+            onDelete(event) {
+                console.log('onDelete', this.course);
+                this.$store.dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
+                this.$store.commit('SET_DELETING', true);
+                this.$store.dispatch('DELETE_COURSE', this.course).then(course => {
+                    course = {};
+                    this.$store.commit('SET_COURSE', { course });
+                    this.$store.commit('SET_DELETING', false);
+                    this.$store.dispatch('AJAX_CALL_SUCCESS');
+                    this.$router.push({name: 'courselist'});
+                }).catch(error => {
+                    this.$store.dispatch('AJAX_CALL_ERROR');
+                    this.$store.commit('SET_DELETING', false );
+                });
             }
         }
     };
