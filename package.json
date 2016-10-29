@@ -12,6 +12,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "eslint-plugin-import": "^2.0.1",
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3",
