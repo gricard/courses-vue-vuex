@@ -26,7 +26,10 @@
         // get these props from parent
         props: {
             label: String,
-            wrapperClass: String,
+            wrapperClass: {
+                type: String,
+                default: 'form-group'
+            },
             fieldName: String,
             placeholder: String,
             value: String,
