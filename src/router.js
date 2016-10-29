@@ -12,14 +12,13 @@ import AboutPage from './components/AboutPage';
 
 // setup router
 const routes = [
-    { path: '/courses',     component: CoursesPage,             name: 'courselist' },
-    { path: '/course',      component: ManageCoursePage,        name: 'newcourse' },
-    { path: '/course/:id',  component: ManageCoursePage,        name: 'editcourse' },
-    { path: '/authors',     component: HomePage,                name: 'home' }, // TODO fixme
-    { path: '/about',       component: AboutPage,               name: 'about' },
-    { path: '/',            component: HomePage,                name: 'home' },
-
-    { path: '*',            redirect: '/' } // catch-all
+    { path: '/courses',         component: CoursesPage,             name: 'courselist' },
+    { path: '/course',          component: ManageCoursePage,        name :'newcourse' },
+    { path: '/course/:id',      component: ManageCoursePage,        name: 'editcourse' },
+    { path: '/authors',         component: HomePage,                name: 'authorlist' }, // TODO fixme
+    { path: '/about',           component: AboutPage,               name: 'about' },
+    { path: '/',                component: HomePage,                name: 'home' },
+    { path: '*',                redirect: '/' }
 ];
 
 const router = new VueRouter({

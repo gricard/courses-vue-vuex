@@ -2,7 +2,13 @@
     <div>
         <h1>Courses</h1>
 
-        <router-link to="/course" class="btn btn-primary">Add Course</router-link>
+        <!--<router-link to="/course" class="btn btn-primary">Add Course</router-link>-->
+
+        <input type="submit"
+            value="Add Course"
+            class="btn btn-primary"
+            @click.prevent="handleRedirectToAddCoursePage"
+        />
 
         <CourseList :courses="courses" :authors="authors" :errors="errors"></CourseList>
     </div>
@@ -42,6 +48,10 @@
             addCourse() {
                 console.log('add course!');
 
+            },
+
+            handleRedirectToAddCoursePage() {
+                this.$router.push({name: 'newcourse'});
             }
         }
     }
