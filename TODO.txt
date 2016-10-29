@@ -1,0 +1,3 @@
+- ajax call error pass back error text
+- toastr integration
+- authors management
