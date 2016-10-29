@@ -7,6 +7,7 @@ Vue.use(VueRouter);
 import CoursesPage from './components/CoursesPage.vue'
 import ManageCoursePage from './components/ManageCoursePage.vue'
 import HomePage from './components/HomePage';
+import AboutPage from './components/AboutPage';
 
 
 // setup router
@@ -19,7 +20,7 @@ const routes = [
         component: ManageCoursePage
     },
     { path: '/authors', component: HomePage, name: 'home' }, // TODO fixme
-    { path: '/about', component: HomePage, name: 'home' },
+    { path: '/about', component: AboutPage, name: 'about' },
     { path: '/', component: HomePage, name: 'home' },
     { path: '*', redirect: '/' }
 ];
