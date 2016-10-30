@@ -21,6 +21,13 @@
               padding-top: 20px;
           }
 
+
+          .fade-enter-active, .fade-leave-active {
+              transition: opacity .2s
+          }
+          .fade-enter, .fade-leave-active {
+              opacity: 0
+          }
       </style>
 </head>
   <body>
@@ -29,7 +36,9 @@
 
           <!-- route outlet -->
           <!-- component matched by the route will render here -->
-          <router-view></router-view>
+          <transition name="fade" mode="out-in">
+            <router-view></router-view>
+          </transition>
       </div>
   </body>
 </html>
