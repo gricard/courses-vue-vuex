@@ -16,7 +16,7 @@
 
 
 <script>
-    import CourseList from './CourseList';
+    import CourseList from '../CourseList';
 
     export default {
         name: 'CoursesPage',

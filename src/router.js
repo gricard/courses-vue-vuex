@@ -4,10 +4,10 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 // custom components and pages
-import CoursesPage from './components/CoursesPage.vue'
-import ManageCoursePage from './components/ManageCoursePage.vue'
+import CoursesPage from './components/pages/CoursesPage.vue'
+import ManageCoursePage from './components/pages/ManageCoursePage.vue'
 import HomePage from './components/HomePage';
-import AboutPage from './components/AboutPage';
+import AboutPage from './components/pages/AboutPage';
 
 
 // setup router
