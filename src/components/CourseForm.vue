@@ -9,6 +9,7 @@
             :value="course.title"
             :error="errors.title"
             @textchange="changeTitle"
+            ref="titleField"
         />
 
         <TextInput
@@ -81,9 +82,16 @@
 
         beforeMount() {
             if (!this.$store.state.course.id || (this.course && this.$store.state.course && this.course.id != this.$store.state.course.id)) {
-                console.log('loading course', this.course)
                 this.$store.commit('loadCourse', this.course);
             }
+        },
+
+        mounted() {
+            // after the next DOM update (when everything should be rendered)
+            // focus the titleField's input
+            this.$nextTick(function() {
+                this.$refs.titleField.$refs.textInput.focus();
+            });
         },
 
         computed: {

@@ -9,6 +9,7 @@
                 :placeholder="placeholder"
                 :value="value"
                 @input="updateValue($event.target.value)"
+                ref="textInput"
             >
             <!--@change updates after blur , @input is on keyup-->
 
