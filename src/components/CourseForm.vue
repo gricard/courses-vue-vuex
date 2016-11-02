@@ -21,11 +21,11 @@
         />
 
         <TextInput
-            name="length"
+            fieldName="length"
             label="Length"
             :value="course.length"
             :error="errors.length"
-            @textchange=changeLength
+            @change="onChange"
         />
 
 
@@ -72,7 +72,8 @@
             course: Object,
             errors: Object,
             allAuthors: Array,
-            onSave: Function
+            onSave: Function,
+            onChange: Function
         },
 //
 //        components: {
@@ -127,8 +128,9 @@
                 this.$store.commit('changeCategory', name);
             },
 
-            changeLength(val) {
+            changeLength(val, evt) {
                 console.log('changeLength' , val);
+                console.log('event args', evt);
                 this.course.length = val;
                 this.$store.commit('changeLength', val);
             },

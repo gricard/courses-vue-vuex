@@ -8,7 +8,7 @@
                 :name="fieldName"
                 :placeholder="placeholder"
                 :value="value"
-                @input="updateValue($event.target.value)"
+                @input="updateValue($event.target.value, $event)"
                 ref="textInput"
             >
             <!--@change updates after blur , @input is on keyup-->
@@ -59,8 +59,9 @@
             // send events up
             // new value goes back up to parent component
             // parent component can use @textchange="handlerFunc" to get this
-            updateValue: function (value) {
-                this.$emit('textchange', value)
+            updateValue: function (value, event) {
+                this.$emit('textchange', value, event) // TODO get rid of this eventually
+                this.$emit('change', event)
             }
         }
 

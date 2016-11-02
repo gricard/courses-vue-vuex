@@ -5,6 +5,7 @@
             :errors="errors"
             :allAuthors="authors"
             :onSave="handleSaveCourse"
+            :onChange="handleUpdateCourseState"
         />
 
         <!--<CourseForm-->
@@ -105,6 +106,21 @@
                         toastr.error(error);
                     });
             },
+
+            handleUpdateCourseState(event) {
+                console.log('update course state', arguments);
+
+                const field = event.target.name;
+                let course = this.$store.state.course;
+                course[field] = event.target.value;
+
+                // TODO keep a copy of the original data and actually compare changes instead of just assuming it changed
+                // if user changes it and then edits it back to normal the form will still think it's dirty
+
+                // mark state as dirty so we can trigger a leave page handler
+//                this.commit('SET_DIRTY', true);
+                return this.$store.commit('SET_COURSE', {course: course});
+            }
         },
 
         computed: {
