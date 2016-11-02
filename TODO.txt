@@ -1,4 +1,8 @@
+- finalize CourseForm/AuthorForm like in react/redux
+- form validation
 - ajax call error pass back error text
 - toastr integration
 - code-splitting    http://vuejs.org/guide/components.html#Async-Components
 - vue-focus     https://github.com/simplesmiler/vue-focus
+- 404
+
