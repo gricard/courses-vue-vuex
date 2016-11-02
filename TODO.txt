@@ -1,3 +1,4 @@
 - ajax call error pass back error text
 - toastr integration
-- authors management
+- code-splitting    http://vuejs.org/guide/components.html#Async-Components
+- vue-focus     https://github.com/simplesmiler/vue-focus
