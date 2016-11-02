@@ -3,9 +3,9 @@
         <nav>
             <router-link to="/">Home</router-link>
             |
-            <router-link to="/courses">Courses</router-link>
+            <router-link to="/courses">Courses ({{ numCourses }})</router-link>
             |
-            <router-link to="/authors">Authors</router-link>
+            <router-link to="/authors">Authors ({{ numAuthors }})</router-link>
             |
             <router-link to="/about">About</router-link>
 
@@ -28,6 +28,14 @@
             loading: function() {
                 return this.$store.state.ajaxCallsInProgress > 0;
             },
+
+            numCourses: function() {
+                return this.$store.state.courses.length + 0;
+            },
+
+            numAuthors: function() {
+                return this.$store.state.authors.length + 0;
+            }
 
         }
     }
