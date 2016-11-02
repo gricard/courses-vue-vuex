@@ -74,9 +74,12 @@
             errors: Object,
             allAuthors: Array,
             onSave: Function,
-            onChange: Function
+            onChange: Function,
+            saving: Boolean,
+            deleting: Boolean
         },
 //
+        // locally included components
 //        components: {
 ////            'SelectInput': SelectInput
 //        },
@@ -96,13 +99,13 @@
         },
 
         computed: {
-            saving() {
-                return this.$store.state.saving;
-            },
-
-            deleting() {
-                return this.$store.state.deleting;
-            }
+//            saving() {
+//                return this.$store.state.saving;
+//            },
+//
+//            deleting() {
+//                return this.$store.state.deleting;
+//            }
         },
 
         methods: {

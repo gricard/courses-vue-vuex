@@ -6,17 +6,19 @@
             :allAuthors="authors"
             :onSave="handleSaveCourse"
             :onChange="handleUpdateCourseState"
+            :saving="this.$store.state.saving"
+            :deleting="this.$store.state.deleting"
         />
 
         <!--<CourseForm-->
-            <!--allAuthors={this.props.authors}-->
-            <!--onChange={this.handleUpdateCourseState}-->
-            <!--onSave={this.handleSaveCourse}-->
-            <!--onDelete={this.handleDeleteCourse}-->
             <!--course={this.state.course}-->
             <!--errors={this.state.errors}-->
+            <!--allAuthors={this.props.authors}-->
+            <!--onSave={this.handleSaveCourse}-->
+            <!--onChange={this.handleUpdateCourseState}-->
             <!--saving={this.state.saving}-->
             <!--deleting={this.state.deleting}-->
+            <!--onDelete={this.handleDeleteCourse}-->
         <!--/>-->
     </div>
 </template>
