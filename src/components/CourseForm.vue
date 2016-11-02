@@ -35,7 +35,6 @@
             :value="course.authorId"
             defaultOption="Select Author"
             :options="allAuthors"
-            @menuchange="this.changeAuthor"
             :error="errors.authorId" />
 
         <br>
@@ -73,7 +72,7 @@
             course: Object,
             errors: Object,
             allAuthors: Array,
-            changeAuthor: Function
+            onSave: Function
         },
 //
 //        components: {
@@ -111,6 +110,9 @@
             // unify state of this form in the store instead of storing in both places
 
             // TODO THESE NEED TO BE DISPATCHING EVENTS, NOT COMMITTING MUTATIONS!
+            // maybe, maybe not
+
+            // TODO mapMutations?
 
             // catch the textchange event for the title field and update it
             changeTitle(title) {
@@ -130,11 +132,11 @@
                 this.course.length = val;
                 this.$store.commit('changeLength', val);
             },
-
-            onSave(event) {
-                console.log('onSave', this.course);
-                this.$store.dispatch('SAVE_COURSE', this.course);
-            },
+//
+//            onSave(event) {
+//                console.log('onSave', this.course);
+//                this.$store.dispatch('SAVE_COURSE', this.course);
+//            },
 
             onDelete(event) {
                 console.log('onDelete', this.course);

@@ -15,6 +15,7 @@
 
 <script>
     import CourseList from '../CourseList';
+    import toastr from 'toastr';
 
     export default {
         name: 'CoursesPage',

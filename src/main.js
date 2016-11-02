@@ -29,6 +29,7 @@ Vue.component('SelectInput', SelectInput);
 
 // webpack can import css
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/toastr/build/toastr.min.css';
 
 // setup application and start it
 let app = new Vue({

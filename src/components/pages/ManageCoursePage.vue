@@ -4,7 +4,7 @@
             :course="course"
             :errors="errors"
             :allAuthors="authors"
-            :changeAuthor="changeAuthor"
+            :onSave="handleSaveCourse"
         />
 
         <!--<CourseForm-->
@@ -23,6 +23,7 @@
 
 <script>
     import CourseForm from '../CourseForm';
+    import toastr from 'toastr';
 
     export default {
         name: 'ManageCoursePage',
@@ -54,15 +55,56 @@
 
             },
 
-            doStuff() {
-                console.log('store', this.$store);
+            //// Helper/utility functions
+            courseFormIsValid() {
+                let formIsValid = true;
+                let errors = {};
+
+                if (this.state.course.title.length < 5) {
+                    errors.title = 'Title must be at least 5 characters.';
+                    formIsValid = false;
+                }
+
+                this.setState({errors: errors});
+                return formIsValid;
             },
 
-            changeAuthor(authorId) {
-                console.log('changeAuthor' , authorId);
-                this.course.authorId = authorId;
-                this.$store.commit('changeAuthor', authorId);
-            }
+            redirectSave() {
+                console.log('redirect save');
+                this.$store.commit('SET_SAVING', false);
+                this.redirect('Course Saved');
+            },
+
+            redirectDelete() {
+                //console.log('redirect delete');
+                this.$store.commit('SET_DELETING', false);
+                this.redirect('Course Deleted');
+            },
+
+            redirect(msg) {
+                toastr.success(msg);
+                // redirect to courses page after save
+                this.$router.push({name: 'courselist'});
+            },
+
+            handleSaveCourse() {
+
+//                if (!this.courseFormIsValid()) {
+//                    return;
+//                }
+
+                this.$store.commit('SET_SAVING', true);
+                this.$store.dispatch('SAVE_COURSE', this.$store.state.course)
+                    .then(() => {
+                        //this.setState({dirty: false});
+                        console.log('saved!');
+                        this.redirectSave();
+                    })
+                    .catch(error => {
+                        this.$store.commit('SET_SAVING', false);
+                        toastr.error(error);
+                    });
+            },
         },
 
         computed: {
