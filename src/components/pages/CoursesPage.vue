@@ -2,8 +2,6 @@
     <div>
         <h1>Courses</h1>
 
-        <!--<router-link to="/course" class="btn btn-primary">Add Course</router-link>-->
-
         <input type="submit"
             value="Add Course"
             class="btn btn-primary"

@@ -19,7 +19,6 @@
         },
 
         computed: {
-            // TODO add error checks
             authorName: function() {
                 return this.author.firstName + ' ' + this.author.lastName;
             }

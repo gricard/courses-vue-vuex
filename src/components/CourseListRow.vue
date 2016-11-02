@@ -21,19 +21,15 @@
         },
 
         computed: {
-            // TODO add error checks
             authorName: function() {
                 const authors = Array.from(this.authors),
                     author = authors.filter(author => author.id === this.course.authorId)[0];
-                return author.firstName + ' ' + author.lastName;
+                return (author.firstName && author.lastName) ? author.firstName + ' ' + author.lastName : 'unknown';
             }
         },
 
         methods: {
-            dumb() {
-                console.log('dumb dumb!');
 
-            }
         }
     }
 </script>
