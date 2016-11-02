@@ -5,6 +5,7 @@
         </td>
         <td>{{author.firstName}}</td>
         <td>{{author.lastName}}</td>
+        <td>{{author.id}}</td>
     </tr>
 </template>
 

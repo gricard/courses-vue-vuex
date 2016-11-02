@@ -5,6 +5,7 @@
                 <th>&nbsp;</th>
                 <th>First Name</th>
                 <th>Last Name</th>
+                <th>ID</th>
             </tr>
         </thead>
         <tbody >
