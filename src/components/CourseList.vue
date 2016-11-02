@@ -31,10 +31,7 @@
         },
 
         methods: {
-            dumb() {
-                console.log('dumb');
 
-            }
         }
     }
 </script>

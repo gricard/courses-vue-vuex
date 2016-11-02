@@ -62,7 +62,7 @@
                 console.log('changeAuthor' , authorId);
                 this.course.authorId = authorId;
                 this.$store.commit('changeAuthor', authorId);
-            },
+            }
         },
 
         computed: {

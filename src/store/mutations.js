@@ -20,6 +20,10 @@ export const mutations = {
         state.authors = authors;
     },
 
+    SET_AUTHOR (state, { author }) {
+        state.author = author;
+    },
+
     INCREMENT_AJAX_CALLS (state) {
         state.ajaxCallsInProgress++;
     },
@@ -68,6 +72,20 @@ export const mutations = {
     loadCourse (state, course) {
 //        console.log('loadCourse', course);
         state.course = course;
+    },
+
+    loadAuthor(state, author) {
+        state.author = author;
+    },
+
+    changeFirstName(state, newVal) {
+        console.log('set new firstName', newVal);
+        state.author.firstName = newVal;
+    },
+
+    changeLastName(state, newVal) {
+        console.log('set new lastName', newVal);
+        state.author.lastName = newVal;
     }
 
-}
+};

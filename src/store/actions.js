@@ -102,12 +102,59 @@ export const actions = {
     },
 
     LOAD_AUTHORS: ({ commit, dispatch, state }) => {
-        //        dispatch('AJAX_BEGIN'); // increment ajax call count
+        dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
         return AuthorApi.getAllAuthors().then(authors => {
             commit('SET_AUTHORS', { authors });
-            //            dispatch('AJAX_SUCCESS');
+            dispatch('AJAX_CALL_SUCCESS');
         }).catch(error => {
+            dispatch('AJAX_CALL_ERROR');
             throw(error);
         });
-    }
+    },
+
+    FETCH_AUTHOR: ({ commit, dispatch, state }, { id }) => {
+        const authors = Array.from(state.authors);
+
+        // ensure we have data load if we load the author page directly
+        if (authors.length < 1) {
+            return dispatch('LOAD_AUTHORS').then(something => {
+                dispatch('FETCH_AUTHOR', { id: id });
+            });
+        }
+
+        // get author from list we already retrieved
+        let author = authors.filter(author => author.id == id).pop();
+
+        // clone it so it's not a reference
+        // so that when we edit the form we are not editing the author in the author list also
+        author = Vue.util.extend({}, author);
+
+        // set the state
+        commit('SET_AUTHOR', { author });
+    },
+
+    SAVE_AUTHOR: ({ commit, dispatch, state }, author) => {
+        dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
+        commit('SET_SAVING', true);
+        return AuthorApi.saveAuthor(author).then(author => {
+            //            author.id ? dispatch('UPDATE_AUTHOR_SUCCESS') : dispatch('CREATE_AUTHOR_SUCCESS');
+            commit('SET_AUTHOR', { author });
+            dispatch('AJAX_CALL_SUCCESS');
+
+            commit('SET_SAVING', false);
+
+            // replace in author list?
+            //            author.id ? dispatch(updateAuthorSuccess(author)) : dispatch(createAuthorSuccess(author));
+        }).catch(error => {
+            //            throw(error);
+            //            dispatch(ajaxCallError(error));
+            dispatch('AJAX_CALL_ERROR');
+
+            commit('SET_SAVING', false );
+        });
+    },
+
+    DELETE_AUTHOR: ({ commit, dispatch, state }, author) => {
+        return AuthorApi.deleteAuthor(author);
+    },
 };
