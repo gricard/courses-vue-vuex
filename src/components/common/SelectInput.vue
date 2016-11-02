@@ -7,7 +7,7 @@
                 class="form-control"
                 :name="fieldName"
                 :value="value"
-                @change="updateValue($event.target.value)"
+                @change="onChange($event)"
             >
                 <option value="">{{defaultOption}}</option>
                 <option v-for="option in options" :value="option.value" :key="option.value">{{ option.text }}</option>
@@ -26,7 +26,7 @@
             wrapperClass: String,
             fieldName: String,
             value: String,
-//            onChange: String,
+            onChange: Function,
             error: String,
             options: Array,
             defaultOption: String

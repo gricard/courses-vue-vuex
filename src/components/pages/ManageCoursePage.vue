@@ -109,6 +109,7 @@
 
             handleUpdateCourseState(event) {
                 console.log('update course state', arguments);
+                console.log('setting ' + event.target.name + ' to', event.target.value);
 
                 const field = event.target.name;
                 let course = this.$store.state.course;

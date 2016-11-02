@@ -8,16 +8,16 @@
             placeholder="Enter title"
             :value="course.title"
             :error="errors.title"
-            @textchange="changeTitle"
+            :onChange="onChange"
             ref="titleField"
         />
 
         <TextInput
-            name="category"
+            fieldName="category"
             label="Category"
             :value="course.category"
             :error="errors.category"
-            @textchange="changeCategory"
+            :onChange="onChange"
         />
 
         <TextInput
@@ -25,17 +25,18 @@
             label="Length"
             :value="course.length"
             :error="errors.length"
-            @change="onChange"
+            :onChange="onChange"
         />
 
-
         <SelectInput
-            name="authorId"
+            fieldName="authorId"
             label="Author"
             :value="course.authorId"
             defaultOption="Select Author"
             :options="allAuthors"
-            :error="errors.authorId" />
+            :error="errors.authorId"
+            :onChange="onChange"
+        />
 
         <br>
 

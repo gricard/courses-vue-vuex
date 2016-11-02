@@ -8,10 +8,9 @@
                 :name="fieldName"
                 :placeholder="placeholder"
                 :value="value"
-                @input="updateValue($event.target.value, $event)"
+                @input="onChange($event)"
                 ref="textInput"
             >
-            <!--@change updates after blur , @input is on keyup-->
 
             <div v-if="error" class="alert alert-danger">{{error}}</div>
         </div>
@@ -34,7 +33,8 @@
             fieldName: String,
             placeholder: String,
             value: String,
-            error: String
+            error: String,
+            onChange: Function
         },
 
         computed: {
@@ -56,13 +56,13 @@
         },
 
         methods: {
-            // send events up
-            // new value goes back up to parent component
-            // parent component can use @textchange="handlerFunc" to get this
-            updateValue: function (value, event) {
-                this.$emit('textchange', value, event) // TODO get rid of this eventually
-                this.$emit('change', event)
-            }
+//            // send events up
+//            // new value goes back up to parent component
+//            // parent component can use @textchange="handlerFunc" to get this
+//            updateValue: function (value, event) {
+//                this.$emit('textchange', value, event) // TODO get rid of this eventually
+//                this.$emit('change', event)
+//            }
         }
 
     }
