@@ -52,48 +52,12 @@ export const mutations = {
         state.dirty = dirty;
     },
 
-    changeName (state, name) {
-        console.log('set new name', name);
-        state.course.name = name;
-    },
-
-    changeTitle (state, title) {
-        console.log('set new title', title);
-        state.course.title = title;
-    },
-
-    changeLength (state, length) {
-        console.log('set new length', length);
-        state.course.length = length;
-    },
-
-    changeCategory (state, newVal) {
-        console.log('set new cateogry', newVal);
-        state.course.category = newVal;
-    },
-
-    changeAuthor(state, newVal) {
-        console.log('set new author', newVal);
-        state.course.authorId = newVal;
-    },
-
     loadCourse (state, course) {
-//        console.log('loadCourse', course);
         state.course = course;
     },
 
     loadAuthor(state, author) {
         state.author = author;
-    },
-
-    changeFirstName(state, newVal) {
-        console.log('set new firstName', newVal);
-        state.author.firstName = newVal;
-    },
-
-    changeLastName(state, newVal) {
-        console.log('set new lastName', newVal);
-        state.author.lastName = newVal;
     }
 
 };
