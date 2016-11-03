@@ -1,6 +1,5 @@
 <template>
-    <div class="container-fluid">
-        <nav>
+    <nav class="container-fluid">
             <router-link to="/">Home</router-link>
             |
             <router-link to="/courses">Courses ({{ numCourses }})</router-link>
@@ -10,8 +9,7 @@
             <router-link to="/about">About</router-link>
 
             <LoadingDots v-if="loading" interval=100 dots=20 />
-        </nav>
-    </div>
+    </nav>
 </template>
 
 <script>

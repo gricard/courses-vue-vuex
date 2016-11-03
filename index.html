@@ -32,13 +32,15 @@
 </head>
   <body>
       <div id="app">
-          <SiteHeader></SiteHeader>
+          <div  class="container-fluid">
+              <SiteHeader></SiteHeader>
 
-          <!-- route outlet -->
-          <!-- component matched by the route will render here -->
-          <transition name="fade" mode="out-in">
-            <router-view></router-view>
-          </transition>
+              <!-- route outlet -->
+              <!-- component matched by the route will render here -->
+              <transition name="fade" mode="out-in">
+                <router-view></router-view>
+              </transition>
+          </div>
       </div>
   </body>
 </html>
