@@ -21,6 +21,7 @@ export const state = {
     },
     saving: false,
     deleting: false,
+    dirty: false,
     loadingFrame: 1,
     ajaxCallsInProgress: 0
 };

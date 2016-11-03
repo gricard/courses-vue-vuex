@@ -48,6 +48,10 @@ export const mutations = {
         state.errors = errors;
     },
 
+    SET_DIRTY (state, dirty) {
+        state.dirty = dirty;
+    },
+
     changeName (state, name) {
         console.log('set new name', name);
         state.course.name = name;

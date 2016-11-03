@@ -31,4 +31,22 @@ const router = new VueRouter({
     linkActiveClass: 'active'
 });
 
+// global router intercept doesn't have access to Vue as 'this'
+// need a different way to commit the state change then...
+//router.beforeEach((to, from, next) => {
+//    if (this.$store.state.dirty) {
+//        // could do the form below, but better to be clear than clever
+//        //next(window.confirm('You have unsaved changes. Are you sure you want to leave this page?'));
+//        if (window.confirm('Yo! You have unsaved changes. Are you sure you want to leave this page?')) {
+//            // reset dirty state
+//            this.$store.commit('SET_DIRTY', true);
+//            next();
+//        } else {
+//            next(false);
+//        }
+//    } else {
+//        next();
+//    }
+//});
+
 export default router;

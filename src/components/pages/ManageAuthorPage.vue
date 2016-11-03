@@ -35,11 +35,22 @@
             });
         },
 
-        //        data () {
-        //            return {
-        //                author: { id: 1, title: 'foo', author: 'bob', watchHref: 'http://google.com', timeLength: '2:00', category: 'code' }
-        //            };
-        //        },
+        // confirm leaving page if the form is dirty
+        beforeRouteLeave (to, from, next) {
+            if (this.$store.state.dirty) {
+                // could do the form below, but better to be clear than clever
+                //next(window.confirm('You have unsaved changes. Are you sure you want to leave this page?'));
+                if (!window.confirm('You have unsaved changes. Are you sure you want to leave this page?')) {
+                    // stay on this page then
+                    next(false);
+                    return;
+                }
+            }
+            // ok to leave
+            // reset dirty state
+            this.$store.commit('SET_DIRTY', false);
+            next();
+        },
 
         methods: {
             //// Helper/utility functions
@@ -106,7 +117,7 @@
                 // if user changes it and then edits it back to normal the form will still think it's dirty
 
                 // mark state as dirty so we can trigger a leave page handler
-                //                this.commit('SET_DIRTY', true);
+                this.$store.commit('SET_DIRTY', true);
                 return this.$store.commit('SET_AUTHOR', {author: author});
             },
 

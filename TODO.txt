@@ -1,4 +1,3 @@
-- finalize CourseForm/AuthorForm like in react/redux
 - form validation
 - author delete validations
 - ajax call error pass back error
