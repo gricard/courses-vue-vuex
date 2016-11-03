@@ -6,20 +6,10 @@
             :allAuthors="authors"
             :onSave="handleSaveCourse"
             :onChange="handleUpdateCourseState"
+            :onDelete="handleDeleteCourse"
             :saving="this.$store.state.saving"
             :deleting="this.$store.state.deleting"
         />
-
-        <!--<CourseForm-->
-            <!--course={this.state.course}-->
-            <!--errors={this.state.errors}-->
-            <!--allAuthors={this.props.authors}-->
-            <!--onSave={this.handleSaveCourse}-->
-            <!--onChange={this.handleUpdateCourseState}-->
-            <!--saving={this.state.saving}-->
-            <!--deleting={this.state.deleting}-->
-            <!--onDelete={this.handleDeleteCourse}-->
-        <!--/>-->
     </div>
 </template>
 
@@ -123,6 +113,27 @@
                 // mark state as dirty so we can trigger a leave page handler
 //                this.commit('SET_DIRTY', true);
                 return this.$store.commit('SET_COURSE', {course: course});
+            },
+
+            handleDeleteCourse(event) {
+                // TODO this needs to go elsewhere
+                this.$store.dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
+
+                this.$store.commit('SET_DELETING', true);
+
+                this.$store.dispatch('DELETE_COURSE', this.$store.state.course)
+                    .then(course => {
+                        course = {};
+                        this.$store.commit('SET_COURSE', { course });
+                        this.$store.commit('SET_DELETING', false);
+                        this.$store.dispatch('AJAX_CALL_SUCCESS');
+                        this.$router.push({name: 'courselist'});
+                    })
+                    .catch(error => {
+                        this.$store.dispatch('AJAX_CALL_ERROR');
+                        this.$store.commit('SET_DELETING', false );
+                        toastr.error(error);
+                    });
             }
         },
 
