@@ -51,7 +51,7 @@
             //// Helper/utility functions
             courseFormIsValid() {
                 let formIsValid = true;
-                let errors = {};
+                let errors = this.$store.state.errors || {};
 
                 if (this.$store.state.course.title.length < 5) {
                     errors.title = 'Title must be at least 5 characters.';
