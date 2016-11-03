@@ -53,12 +53,12 @@
                 let formIsValid = true;
                 let errors = {};
 
-                if (this.state.course.title.length < 5) {
+                if (this.$store.state.course.title.length < 5) {
                     errors.title = 'Title must be at least 5 characters.';
                     formIsValid = false;
                 }
 
-                this.setState({errors: errors});
+                this.$store.commit('SET_ERRORS', errors);
                 return formIsValid;
             },
 
@@ -82,9 +82,9 @@
 
             handleSaveCourse() {
 
-//                if (!this.courseFormIsValid()) {
-//                    return;
-//                }
+                if (!this.courseFormIsValid()) {
+                    return;
+                }
 
                 this.$store.commit('SET_SAVING', true);
                 this.$store.dispatch('SAVE_COURSE', this.$store.state.course)

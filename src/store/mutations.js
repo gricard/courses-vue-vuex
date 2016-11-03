@@ -44,6 +44,10 @@ export const mutations = {
         state.deleting = deleting;
     },
 
+    SET_ERRORS (state, errors) {
+        state.errors = errors;
+    },
+
     changeName (state, name) {
         console.log('set new name', name);
         state.course.name = name;
