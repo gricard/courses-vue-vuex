@@ -2,7 +2,6 @@
 - author delete validations
 - ajax call error pass back error
 - move SET_SAVING / SET_DELETING into actions
-- 404
 - tests
 - code-splitting    http://vuejs.org/guide/components.html#Async-Components
 - vue-focus     https://github.com/simplesmiler/vue-focus

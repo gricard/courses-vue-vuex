@@ -10,6 +10,7 @@ import AuthorsPage from './components/pages/AuthorsPage.vue'
 import ManageAuthorPage from './components/pages/ManageAuthorPage.vue'
 import HomePage from './components/pages/HomePage';
 import AboutPage from './components/pages/AboutPage';
+import NotFoundPage from './components/pages/NotFoundPage';
 
 
 // setup router
@@ -22,7 +23,7 @@ const routes = [
     { path: '/author/:id',      component: ManageAuthorPage,        name: 'editauthor' },
     { path: '/about',           component: AboutPage,               name: 'about' },
     { path: '/',                component: HomePage,                name: 'home' },
-    { path: '*',                redirect: '/' }
+    { path: '*',                component: NotFoundPage,            name: 'notfound' }
 ];
 
 const router = new VueRouter({
