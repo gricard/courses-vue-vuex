@@ -43,11 +43,6 @@
 //        },
 
         methods: {
-            addCourse() {
-                console.log('add course!');
-
-            },
-
             //// Helper/utility functions
             courseFormIsValid() {
                 let formIsValid = true;
@@ -80,8 +75,9 @@
                 this.$router.push({name: 'courselist'});
             },
 
-            handleSaveCourse() {
 
+            //// Form handlers
+            handleSaveCourse() {
                 if (!this.courseFormIsValid()) {
                     return;
                 }
