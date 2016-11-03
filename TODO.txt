@@ -1,7 +1,10 @@
 - finalize CourseForm/AuthorForm like in react/redux
 - form validation
+- author delete validations
 - ajax call error pass back error text
+- 404
+- tests
 - code-splitting    http://vuejs.org/guide/components.html#Async-Components
 - vue-focus     https://github.com/simplesmiler/vue-focus
-- 404
+
 
