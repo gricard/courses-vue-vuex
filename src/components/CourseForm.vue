@@ -86,6 +86,7 @@
 //        },
 
         beforeMount() {
+            // load course record if we don't already have it
             if (!this.$store.state.course.id || (this.course && this.$store.state.course && this.course.id != this.$store.state.course.id)) {
                 this.$store.commit('loadCourse', this.course);
             }
