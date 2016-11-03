@@ -115,51 +115,6 @@
             // change these to dispatch actions instead
             // unify state of this form in the store instead of storing in both places
 
-            // TODO THESE NEED TO BE DISPATCHING EVENTS, NOT COMMITTING MUTATIONS!
-            // maybe, maybe not
-
-            // TODO mapMutations?
-
-            // catch the textchange event for the title field and update it
-            changeTitle(title) {
-                console.log('changeTitle' , title);
-                this.course.title = title;
-                this.$store.commit('changeTitle', title);
-            },
-
-            changeCategory(name) {
-                console.log('changeCategory' , name);
-                this.course.category = name;
-                this.$store.commit('changeCategory', name);
-            },
-
-            changeLength(val, evt) {
-                console.log('changeLength' , val);
-                console.log('event args', evt);
-                this.course.length = val;
-                this.$store.commit('changeLength', val);
-            }
-//
-//            onSave(event) {
-//                console.log('onSave', this.course);
-//                this.$store.dispatch('SAVE_COURSE', this.course);
-//            },
-//
-//            onDelete(event) {
-//                console.log('onDelete', this.course);
-//                this.$store.dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
-//                this.$store.commit('SET_DELETING', true);
-//                this.$store.dispatch('DELETE_COURSE', this.course).then(course => {
-//                    course = {};
-//                    this.$store.commit('SET_COURSE', { course });
-//                    this.$store.commit('SET_DELETING', false);
-//                    this.$store.dispatch('AJAX_CALL_SUCCESS');
-//                    this.$router.push({name: 'courselist'});
-//                }).catch(error => {
-//                    this.$store.dispatch('AJAX_CALL_ERROR');
-//                    this.$store.commit('SET_DELETING', false );
-//                });
-//            }
         }
     };
 
