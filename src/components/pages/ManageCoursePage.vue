@@ -33,6 +33,11 @@
 //            console.log('loading course id', this.$route.params.id);
             this.$store.dispatch('FETCH_COURSE', {
                 id: this.$route.params.id
+            }).then(() => {
+                // load course record if we don't already have it
+                if (!this.$store.state.course.id || (this.course && this.$store.state.course && this.course.id != this.$store.state.course.id)) {
+                    this.$store.commit('loadCourse', this.course);
+                }
             });
         },
 
@@ -99,7 +104,6 @@
                     return;
                 }
 
-                this.$store.commit('SET_SAVING', true);
                 this.$store.dispatch('SAVE_COURSE', this.$store.state.course)
                     .then(() => {
                         //this.setState({dirty: false});
@@ -107,7 +111,7 @@
                         this.redirectSave();
                     })
                     .catch(error => {
-                        this.$store.commit('SET_SAVING', false);
+                        console.log('handleSaveCourse: caught error', error);
                         toastr.error(error);
                     });
             },

@@ -1,4 +1,5 @@
 <template>
+    <div>
     <form>
         <h1>Manage Course</h1>
 
@@ -59,6 +60,7 @@
         />
 
     </form>
+    </div>
 </template>
 
 <script>
@@ -85,12 +87,6 @@
 ////            'SelectInput': SelectInput
 //        },
 
-        beforeMount() {
-            // load course record if we don't already have it
-            if (!this.$store.state.course.id || (this.course && this.$store.state.course && this.course.id != this.$store.state.course.id)) {
-                this.$store.commit('loadCourse', this.course);
-            }
-        },
 
         mounted() {
             // after the next DOM update (when everything should be rendered)
