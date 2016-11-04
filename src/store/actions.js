@@ -78,20 +78,20 @@ export const actions = {
 
     SAVE_COURSE: ({ commit, dispatch, state }, course) => {
         dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
+        commit('SET_SAVING', true);
         return CourseApi.saveCourse(course).then(course => {
 //            course.id ? dispatch('UPDATE_COURSE_SUCCESS') : dispatch('CREATE_COURSE_SUCCESS');
             commit('SET_COURSE', { course });
             dispatch('AJAX_CALL_SUCCESS');
-
+            commit('SET_SAVING', false);
 
             // replace in course list?
-//            course.id ? dispatch(updateCourseSuccess(course)) : dispatch(createCourseSuccess(course));
+            //course.id ? dispatch(updateCourseSuccess(course)) : dispatch(createCourseSuccess(course));
         }).catch(error => {
-            //            throw(error);
 //            dispatch(ajaxCallError(error));
+            console.log('SAVE_COURSE: caught error', error);
             dispatch('AJAX_CALL_ERROR', {error: error});
-//
-//            commit('SET_SAVING', false );
+            commit('SET_SAVING', false );
         });
     },
 
