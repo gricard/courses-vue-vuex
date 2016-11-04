@@ -9,9 +9,12 @@
     "build": "node build/build.js",
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
-    "lint": "eslint --ext .js,.vue src test/unit/specs"
+    "test:watch": "npm run test -- --watch",
+    "lint": "eslint --ext .js,.vue src test/unit/specs",
+    "lint:watch": "npm run lint -- --watch"
   },
   "dependencies": {
+    "babel-polyfill": "^6.16.0",
     "bootstrap": "^3.3.7",
     "eslint-plugin-import": "^2.0.1",
     "jquery": "^3.1.1",
