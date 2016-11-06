@@ -32,6 +32,11 @@
             //            console.log('loading author id', this.$route.params.id);
             this.$store.dispatch('FETCH_AUTHOR', {
                 id: this.$route.params.id
+            }).then(() => {
+                // load author record if we don't already have it
+                if (!this.$store.state.author.id || (this.author && this.$store.state.author && this.author.id != this.$store.state.author.id)) {
+                    this.$store.commit('loadAuthor', this.author);
+                }
             });
         },
 
