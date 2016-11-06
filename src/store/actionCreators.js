@@ -37,6 +37,10 @@ export function loadCoursesFailure(error) {
     return { type: types.LOAD_COURSES_FAILURE, error };
 }
 
+export function fetchCourse(id) {
+    return { type: types.FETCH_COURSE, id };
+}
+
 export function createCourseSuccess(course) {
     return {type: types.CREATE_COURSE_SUCCESS, course};
 }

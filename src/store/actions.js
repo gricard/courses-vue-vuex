@@ -3,7 +3,7 @@ import CourseApi  from '../api/mockCourseApi'
 import AuthorApi  from '../api/mockAuthorApi'
 import {
     beginAjaxCall, ajaxCallError, ajaxCallSuccess,
-    loadCourses, loadCoursesSuccess, loadCoursesFailure,
+    loadCourses, loadCoursesSuccess, loadCoursesFailure, fetchCourse,
     loadAuthors
 } from './actionCreators.js';
 
@@ -47,14 +47,13 @@ export const actions = {
         throw(error);
     },
 
-
     FETCH_COURSE: ({ commit, dispatch, state }, { id }) => {
         const courses = Array.from(state.courses);
 
         // ensure we have data load if we load the course page directly
         if (courses.length < 1) {
             return dispatch(loadCourses()).then(something => {
-                dispatch('FETCH_COURSE', { id: id });
+                dispatch(fetchCourse(id));
             });
         }
 

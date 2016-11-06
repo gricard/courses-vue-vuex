@@ -18,6 +18,7 @@
     import CourseForm from '../CourseForm';
     import toastr from 'toastr';
     import { mapState } from 'vuex';
+    import { fetchCourse } from '../../store/actionCreators';
 
     export default {
         name: 'ManageCoursePage',
@@ -31,14 +32,12 @@
         },
 
         beforeMount () {
-//            console.log('loading course id', this.$route.params.id);
-            this.$store.dispatch('FETCH_COURSE', {
-                id: this.$route.params.id
-            }).then(() => {
-                // load course record if we don't already have it
-                if (!this.$store.state.course.id || (this.course && this.$store.state.course && this.course.id != this.$store.state.course.id)) {
-                    this.$store.commit('loadCourse', this.course);
-                }
+            this.$store.dispatch(fetchCourse(this.$route.params.id))
+                .then(() => {
+                    // load course record if we don't already have it
+                    if (!this.$store.state.course.id || (this.course && this.$store.state.course && this.course.id != this.$store.state.course.id)) {
+                        this.$store.commit('loadCourse', this.course);
+                    }
             });
         },
 
