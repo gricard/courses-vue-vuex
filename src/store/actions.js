@@ -3,14 +3,6 @@ import CourseApi  from '../api/mockCourseApi'
 import AuthorApi  from '../api/mockAuthorApi'
 
 export const actions = {
-    // ensure data for rendering given list type
-    //    FETCH_COURSE: ({ commit, dispatch, state }, { type }) => {
-    //        commit('SET_ACTIVE_TYPE', {type});
-    //        return fetchIdsByType(type)
-    //            .then(ids => commit('SET_LIST', {type, ids}))
-    //            .then(() => dispatch('ENSURE_ACTIVE_ITEMS'))
-    //    }
-
     BEGIN_AJAX_CALL: ({ commit, dispatch, state }) => {
         // loading mask?
         commit('INCREMENT_AJAX_CALLS');
@@ -31,20 +23,7 @@ export const actions = {
         commit('SET_LOADING_FRAME', {frame: frame});
     },
 
-    DUMP_STATE: ({ commit, dispatch, state }) => {
-        //        commit('SET_ACTIVE_TYPE', {type});
-        console.log('DUMP_STATE', state);
-    },
-
     LOAD_COURSES: ({ commit, dispatch, state }) => {
-        // only fetch items that we don't already have.
-//        ids = ids.filter(id => !state.items[id])
-//        if (ids.length) {
-//            return fetchItems(ids).then(items => commit('SET_ITEMS', { items }))
-//        } else {
-//            return Promise.resolve()
-//        }
-
         dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
         return CourseApi.getAllCourses().then(courses => {
             commit('SET_COURSES', { courses });
@@ -83,7 +62,10 @@ export const actions = {
 //            course.id ? dispatch('UPDATE_COURSE_SUCCESS') : dispatch('CREATE_COURSE_SUCCESS');
             commit('SET_COURSE', { course });
             dispatch('AJAX_CALL_SUCCESS');
+
+            // update state flags for form
             commit('SET_SAVING', false);
+            commit('SET_DIRTY', false);
 
             // replace in course list?
             //course.id ? dispatch(updateCourseSuccess(course)) : dispatch(createCourseSuccess(course));
@@ -96,7 +78,23 @@ export const actions = {
     },
 
     DELETE_COURSE: ({ commit, dispatch, state }, course) => {
-        return CourseApi.deleteCourse(course);
+        commit('SET_DELETING', true);
+        dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
+
+        return CourseApi.deleteCourse(course).then(course => {
+            // update form status
+            commit('SET_DELETING', false);
+            // clear out course state
+            course = {};
+            commit('SET_COURSE', { course });
+            // update ajax success
+            dispatch('AJAX_CALL_SUCCESS');
+        }).catch(error => {
+            // update form status
+            commit('SET_DELETING', false);
+            // update ajax status
+            dispatch('AJAX_CALL_ERROR');
+        });
     },
 
     LOAD_AUTHORS: ({ commit, dispatch, state }) => {
@@ -139,20 +137,31 @@ export const actions = {
             commit('SET_AUTHOR', { author });
             dispatch('AJAX_CALL_SUCCESS');
 
+            // update form status
             commit('SET_SAVING', false);
+            commit('SET_DIRTY', false);
 
             // replace in author list?
             //            author.id ? dispatch(updateAuthorSuccess(author)) : dispatch(createAuthorSuccess(author));
         }).catch(error => {
-            //            throw(error);
-            //            dispatch(ajaxCallError(error));
             dispatch('AJAX_CALL_ERROR');
-
             commit('SET_SAVING', false );
         });
     },
 
     DELETE_AUTHOR: ({ commit, dispatch, state }, author) => {
-        return AuthorApi.deleteAuthor(author);
+        commit('SET_DELETING', true);
+        dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
+
+        return AuthorApi.deleteAuthor(author).then(author => {
+            commit('SET_DELETING', false);
+            dispatch('AJAX_CALL_SUCCESS');
+            // clear out author state
+            author = {};
+            commit('SET_AUTHOR', { author });
+        }).catch(error => {
+            commit('SET_DELETING', false);
+            dispatch('AJAX_CALL_ERROR');
+        });
     },
 };

@@ -1,8 +1,16 @@
-- move SET_SAVING / SET_DELETING into actions
-- tests
+BUGS:
+
+- deleting an author then clicking their name in the author list before it reloads lets you load that author in the edit form
+  (race condition)
+
+
+FEATURES:
+
 - form validation
 - author delete validations
 - ajax call error pass back error
+- action creator functions
+
 - code-splitting    http://vuejs.org/guide/components.html#Async-Components
 - vue-focus     https://github.com/simplesmiler/vue-focus
 

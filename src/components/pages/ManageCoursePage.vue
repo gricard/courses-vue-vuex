@@ -7,8 +7,8 @@
             :onSave="handleSaveCourse"
             :onChange="handleUpdateCourseState"
             :onDelete="handleDeleteCourse"
-            :saving="this.$store.state.saving"
-            :deleting="this.$store.state.deleting"
+            :saving="saving"
+            :deleting="deleting"
         />
     </div>
 </template>
@@ -17,6 +17,7 @@
 <script>
     import CourseForm from '../CourseForm';
     import toastr from 'toastr';
+    import { mapState } from 'vuex';
 
     export default {
         name: 'ManageCoursePage',
@@ -80,14 +81,10 @@
             },
 
             redirectSave() {
-                console.log('redirect save');
-                this.$store.commit('SET_SAVING', false);
                 this.redirect('Course Saved');
             },
 
             redirectDelete() {
-                //console.log('redirect delete');
-                this.$store.commit('SET_DELETING', false);
                 this.redirect('Course Deleted');
             },
 
@@ -99,26 +96,9 @@
 
 
             //// Form handlers
-            handleSaveCourse() {
-                if (!this.courseFormIsValid()) {
-                    return;
-                }
-
-                this.$store.dispatch('SAVE_COURSE', this.$store.state.course)
-                    .then(() => {
-                        //this.setState({dirty: false});
-                        console.log('saved!');
-                        this.redirectSave();
-                    })
-                    .catch(error => {
-                        console.log('handleSaveCourse: caught error', error);
-                        toastr.error(error);
-                    });
-            },
-
             handleUpdateCourseState(event) {
-                console.log('update course state', arguments);
-                console.log('setting ' + event.target.name + ' to', event.target.value);
+//                console.log('update course state', arguments);
+//                console.log('setting ' + event.target.name + ' to', event.target.value);
 
                 const field = event.target.name;
                 let course = this.$store.state.course;
@@ -132,23 +112,26 @@
                 return this.$store.commit('SET_COURSE', {course: course});
             },
 
-            handleDeleteCourse(event) {
-                // TODO this needs to go elsewhere
-                this.$store.dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
+            handleSaveCourse() {
+                if (!this.courseFormIsValid()) {
+                    return;
+                }
 
-                this.$store.commit('SET_DELETING', true);
-
-                this.$store.dispatch('DELETE_COURSE', this.$store.state.course)
-                    .then(course => {
-                        course = {};
-                        this.$store.commit('SET_COURSE', { course });
-                        this.$store.commit('SET_DELETING', false);
-                        this.$store.dispatch('AJAX_CALL_SUCCESS');
-                        this.$router.push({name: 'courselist'});
+                this.$store.dispatch('SAVE_COURSE', this.$store.state.course)
+                    .then(() => {
+                        this.redirectSave();
                     })
                     .catch(error => {
-                        this.$store.dispatch('AJAX_CALL_ERROR');
-                        this.$store.commit('SET_DELETING', false );
+                        toastr.error(error);
+                    });
+            },
+
+            handleDeleteCourse(event) {
+                this.$store.dispatch('DELETE_COURSE', this.$store.state.course)
+                    .then(course => {
+                        this.redirectDelete();
+                    })
+                    .catch(error => {
                         toastr.error(error);
                     });
             }
@@ -172,7 +155,13 @@
                         text: author.firstName + ' ' + author.lastName
                     };
                 });
-            }
+            },
+
+            // mix the getters into computed with object spread operator
+            ...mapState([
+                'saving',
+                'deleting',
+            ])
         }
     }
 </script>

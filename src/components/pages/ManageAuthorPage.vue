@@ -73,14 +73,10 @@
             },
 
             redirectSave() {
-                console.log('redirect save');
-                this.$store.commit('SET_SAVING', false);
                 this.redirect('Author Saved');
             },
 
             redirectDelete() {
-                //console.log('redirect delete');
-                this.$store.commit('SET_DELETING', false);
                 this.redirect('Author Deleted');
             },
 
@@ -92,24 +88,6 @@
 
 
             //// Form handlers
-            handleSaveAuthor() {
-                if (!this.authorFormIsValid()) {
-                    return;
-                }
-
-                this.$store.commit('SET_SAVING', true);
-                this.$store.dispatch('SAVE_AUTHOR', this.$store.state.author)
-                    .then(() => {
-                        //this.setState({dirty: false});
-                        console.log('saved!');
-                        this.redirectSave();
-                    })
-                    .catch(error => {
-                        this.$store.commit('SET_SAVING', false);
-                        toastr.error(error);
-                    });
-            },
-
             handleUpdateAuthorState(event) {
                 console.log('update author state', arguments);
                 console.log('setting ' + event.target.name + ' to', event.target.value);
@@ -126,23 +104,26 @@
                 return this.$store.commit('SET_AUTHOR', {author: author});
             },
 
-            handleDeleteAuthor(event) {
-                // TODO this needs to go elsewhere
-                this.$store.dispatch('BEGIN_AJAX_CALL'); // increment ajax call count
+            handleSaveAuthor() {
+                if (!this.authorFormIsValid()) {
+                    return;
+                }
 
-                this.$store.commit('SET_DELETING', true);
-
-                this.$store.dispatch('DELETE_AUTHOR', this.$store.state.author)
-                    .then(author => {
-                        author = {};
-                        this.$store.commit('SET_AUTHOR', { author });
-                        this.$store.commit('SET_DELETING', false);
-                        this.$store.dispatch('AJAX_CALL_SUCCESS');
-                        this.$router.push({name: 'authorlist'});
+                this.$store.dispatch('SAVE_AUTHOR', this.$store.state.author)
+                    .then(() => {
+                        this.redirectSave();
                     })
                     .catch(error => {
-                        this.$store.dispatch('AJAX_CALL_ERROR');
-                        this.$store.commit('SET_DELETING', false );
+                        toastr.error(error);
+                    });
+            },
+
+            handleDeleteAuthor(event) {
+                this.$store.dispatch('DELETE_AUTHOR', this.$store.state.author)
+                    .then(author => {
+                        this.redirectDelete();
+                    })
+                    .catch(error => {
                         toastr.error(error);
                     });
             }
