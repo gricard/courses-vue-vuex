@@ -43,9 +43,10 @@ let app = new Vue({
 });
 
 // use promises to execute load actions before mounting the app
+import {loadCourses, loadAuthors } from './store/actionCreators';
 console.log('start loading data');
-store.dispatch('LOAD_COURSES').then(nothing =>
-    store.dispatch('LOAD_AUTHORS').then( nothing2 => {
+store.dispatch(loadCourses()).then(nothing =>
+    store.dispatch(loadAuthors()).then( nothing2 => {
         app.$mount('#app');
         console.log('app started');
     })

@@ -15,6 +15,7 @@
 
 <script>
     import AuthorList from '../AuthorList';
+    import { loadAuthors } from '../../store/actionCreators';
 
     export default {
         name: 'AuthorsPage',
@@ -35,7 +36,7 @@
 
         beforeMount() {
             // load author list
-            this.$store.dispatch('LOAD_AUTHORS');
+            this.$store.dispatch(loadAuthors());
         },
 
         methods: {

@@ -16,6 +16,7 @@
 <script>
     import CourseList from '../CourseList';
     import toastr from 'toastr';
+    import { loadCourses } from '../../store/actionCreators';
 
     export default {
         name: 'CoursesPage',
@@ -40,7 +41,7 @@
 
         beforeMount() {
             // load course list
-            this.$store.dispatch('LOAD_COURSES');
+            this.$store.dispatch(loadCourses());
         },
 
         methods: {

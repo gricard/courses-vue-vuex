@@ -25,6 +25,10 @@ export function ajaxCallSuccess() {
 
 //// COURSES
 
+export function loadCourses() {
+    return { type: types.LOAD_COURSES };
+}
+
 export function loadCoursesSuccess(courses) {
     return { type: types.LOAD_COURSES_SUCCESS, courses };
 }
@@ -52,6 +56,11 @@ export function deleteCourseFailure(course) {
 
 
 //// AUTHORS
+
+
+export function loadAuthors() {
+    return { type: types.LOAD_AUTHORS };
+}
 
 export function loadAuthorsSuccess(authors) {
     return {type: types.LOAD_AUTHORS_SUCCESS, authors};

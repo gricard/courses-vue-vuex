@@ -1,7 +1,11 @@
 import Vue from 'vue';
 import CourseApi  from '../api/mockCourseApi'
 import AuthorApi  from '../api/mockAuthorApi'
-import { beginAjaxCall, ajaxCallError, ajaxCallSuccess } from './actionCreators.js';
+import {
+    beginAjaxCall, ajaxCallError, ajaxCallSuccess,
+    loadCourses,
+    loadAuthors
+} from './actionCreators.js';
 
 export const actions = {
     BEGIN_AJAX_CALL: ({ commit, dispatch, state }) => {
@@ -40,7 +44,7 @@ export const actions = {
 
         // ensure we have data load if we load the course page directly
         if (courses.length < 1) {
-            return dispatch('LOAD_COURSES').then(something => {
+            return dispatch(loadCourses()).then(something => {
                 dispatch('FETCH_COURSE', { id: id });
             });
         }
@@ -114,7 +118,7 @@ export const actions = {
 
         // ensure we have data load if we load the author page directly
         if (authors.length < 1) {
-            return dispatch('LOAD_AUTHORS').then(something => {
+            return dispatch(loadAuthors()).then(something => {
                 dispatch('FETCH_AUTHOR', { id: id });
             });
         }
