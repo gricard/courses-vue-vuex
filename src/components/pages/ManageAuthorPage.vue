@@ -16,6 +16,7 @@
 <script>
     import AuthorForm from '../AuthorForm';
     import toastr from 'toastr';
+    import { fetchAuthor } from '../../store/actionCreators';
 
     export default {
         name: 'ManageAuthorPage',
@@ -28,16 +29,16 @@
             AuthorForm
         },
 
+
         beforeMount () {
             //            console.log('loading author id', this.$route.params.id);
-            this.$store.dispatch('FETCH_AUTHOR', {
-                id: this.$route.params.id
-            }).then(() => {
-                // load author record if we don't already have it
-                if (!this.$store.state.author.id || (this.author && this.$store.state.author && this.author.id != this.$store.state.author.id)) {
-                    this.$store.commit('loadAuthor', this.author);
-                }
-            });
+            this.$store.dispatch(fetchAuthor(this.$route.params.id))
+                .then(() => {
+                    // load author record if we don't already have it
+                    if (!this.$store.state.author.id || (this.author && this.$store.state.author && this.author.id != this.$store.state.author.id)) {
+                        this.$store.commit('loadAuthor', this.author);
+                    }
+                });
         },
 
         // confirm leaving page if the form is dirty

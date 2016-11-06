@@ -74,6 +74,10 @@ export function loadAuthorsFailure(error) {
     return { type: types.LOAD_AUTHORS_FAILURE, error };
 }
 
+export function fetchAuthor(id) {
+    return { type: types.FETCH_AUTHOR, id };
+}
+
 export function createAuthorSuccess(author) {
     return {type: types.CREATE_AUTHOR_SUCCESS, author};
 }
