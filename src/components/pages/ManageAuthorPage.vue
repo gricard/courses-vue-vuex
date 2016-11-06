@@ -6,8 +6,8 @@
             :onSave="handleSaveAuthor"
             :onChange="handleUpdateAuthorState"
             :onDelete="handleDeleteAuthor"
-            :saving="this.$store.state.saving"
-            :deleting="this.$store.state.deleting"
+            :saving="saving"
+            :deleting="deleting"
         />
     </div>
 </template>
@@ -16,6 +16,7 @@
 <script>
     import AuthorForm from '../AuthorForm';
     import toastr from 'toastr';
+    import { mapState } from 'vuex';
     import { fetchAuthor } from '../../store/actionCreators';
 
     export default {
@@ -137,7 +138,13 @@
 
             author () {
                 return this.$store.state.author;
-            }
+            },
+
+            // mix the getters into computed with object spread operator
+            ...mapState([
+                'saving',
+                'deleting',
+            ])
         }
     }
 </script>
