@@ -8,10 +8,10 @@ BUGS:
 
 FEATURES:
 
+- action creator functions (started)
+- courseActions.test.js implementation
 - form validation
 - author delete validations
-- ajax call error pass back error
-- action creator functions
 
 - code-splitting    http://vuejs.org/guide/components.html#Async-Components
 - vue-focus     https://github.com/simplesmiler/vue-focus
