@@ -49,15 +49,24 @@ console.log('start loading data');
 store.dispatch(loadCourses()).then(nothing => {
     console.log('courses loaded');
     store.dispatch(loadAuthors()).then(nothing2 => {
-        console.log('authors loaded');
+        app.$mount('#app');
+        console.log('app started, all data loaded');
     }).catch(error => {
+        app.$mount('#app');
+        console.log('app started, author data failed to load');
         toastr.error(error);
     });
 }).catch(error => {
+    app.$mount('#app');
+    console.log('app started, courses data failed to load');
     toastr.error(error);
 });
 
+
+//// nope, it has to be loaded before the app is rendered or we get errors
+// maybe we need an ENSURE_COURSES action and use a loadingCourses state item to track it?
+
 // load the app
 // don't rely on the load calls completing in order to start because they could fail
-app.$mount('#app');
-console.log('app started');
+//app.$mount('#app');
+//console.log('app started');
