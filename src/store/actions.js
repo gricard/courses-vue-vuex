@@ -4,7 +4,7 @@ import AuthorApi  from '../api/mockAuthorApi'
 import {
     beginAjaxCall, ajaxCallError, ajaxCallSuccess,
     loadCourses, loadCoursesSuccess, loadCoursesFailure, fetchCourse,
-    loadAuthors
+    loadAuthors, loadAuthorsSuccess, loadAuthorsFailure
 } from './actionCreators.js';
 
 export const actions = {
@@ -110,15 +110,36 @@ export const actions = {
         });
     },
 
+
+    //// AUTHORS
+//    LOAD_AUTHORS: ({ commit, dispatch, state }) => {
+//        dispatch(beginAjaxCall()); // increment ajax call count
+//        return AuthorApi.getAllAuthors().then(authors => {
+//            commit('SET_AUTHORS', { authors });
+//            dispatch(ajaxCallSuccess());
+//        }).catch(error => {
+//            dispatch(ajaxCallError(error));
+//            throw(error);
+//        });
+//    },
+
     LOAD_AUTHORS: ({ commit, dispatch, state }) => {
         dispatch(beginAjaxCall()); // increment ajax call count
         return AuthorApi.getAllAuthors().then(authors => {
-            commit('SET_AUTHORS', { authors });
-            dispatch(ajaxCallSuccess());
+            dispatch(loadAuthorsSuccess(authors));
         }).catch(error => {
-            dispatch(ajaxCallError(error));
-            throw(error);
+            dispatch(loadAuthorsFailure(error));
         });
+    },
+
+    LOAD_AUTHORS_SUCCESS: ({ commit, dispatch, state }, { authors }) => {
+        commit('SET_AUTHORS', { authors });
+        dispatch(ajaxCallSuccess());
+    },
+
+    LOAD_AUTHORS_FAILURE: ({ commit, dispatch, state }, { error }) => {
+        dispatch(ajaxCallError(error));
+        throw(error);
     },
 
     FETCH_AUTHOR: ({ commit, dispatch, state }, { id }) => {

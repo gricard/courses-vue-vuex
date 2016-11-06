@@ -15,6 +15,7 @@
 
 <script>
     import AuthorList from '../AuthorList';
+    import toastr from 'toastr';
     import { loadAuthors } from '../../store/actionCreators';
 
     export default {
@@ -35,8 +36,11 @@
         },
 
         beforeMount() {
-            // load author list
-            this.$store.dispatch(loadAuthors());
+            // load course list
+            this.$store.dispatch(loadAuthors())
+                .catch(error => {
+                    toastr.error(error);
+                });
         },
 
         methods: {
