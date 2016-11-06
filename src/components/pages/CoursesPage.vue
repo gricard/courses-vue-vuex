@@ -41,7 +41,10 @@
 
         beforeMount() {
             // load course list
-            this.$store.dispatch(loadCourses());
+            this.$store.dispatch(loadCourses())
+                .catch(error => {
+                    toastr.error(error);
+                });
         },
 
         methods: {
