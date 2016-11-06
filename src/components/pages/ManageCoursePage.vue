@@ -58,12 +58,6 @@
             next();
         },
 
-//        data () {
-//            return {
-//                course: { id: 1, title: 'foo', author: 'bob', watchHref: 'http://google.com', timeLength: '2:00', category: 'code' }
-//            };
-//        },
-
         methods: {
             //// Helper/utility functions
             courseFormIsValid() {
@@ -96,9 +90,6 @@
 
             //// Form handlers
             handleUpdateCourseState(event) {
-//                console.log('update course state', arguments);
-//                console.log('setting ' + event.target.name + ' to', event.target.value);
-
                 const field = event.target.name;
                 let course = this.$store.state.course;
                 course[field] = event.target.value;
