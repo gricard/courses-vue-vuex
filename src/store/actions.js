@@ -3,7 +3,7 @@ import CourseApi  from '../api/mockCourseApi'
 import AuthorApi  from '../api/mockAuthorApi'
 import {
     beginAjaxCall, ajaxCallError, ajaxCallSuccess,
-    loadCourses,
+    loadCourses, loadCoursesSuccess, loadCoursesFailure,
     loadAuthors
 } from './actionCreators.js';
 
@@ -31,13 +31,22 @@ export const actions = {
     LOAD_COURSES: ({ commit, dispatch, state }) => {
         dispatch(beginAjaxCall()); // increment ajax call count
         return CourseApi.getAllCourses().then(courses => {
-            commit('SET_COURSES', { courses });
-            dispatch(ajaxCallSuccess());
+            dispatch(loadCoursesSuccess(courses));
         }).catch(error => {
-            dispatch(ajaxCallError(error));
-            throw(error);
+            dispatch(loadCoursesFailure(error));
         });
     },
+
+    LOAD_COURSES_SUCCESS: ({ commit, dispatch, state }, { courses }) => {
+        commit('SET_COURSES', { courses });
+        dispatch(ajaxCallSuccess());
+    },
+
+    LOAD_COURSES_FAILURE: ({ commit, dispatch, state }, { error }) => {
+        dispatch(ajaxCallError(error));
+        throw(error);
+    },
+
 
     FETCH_COURSE: ({ commit, dispatch, state }, { id }) => {
         const courses = Array.from(state.courses);
