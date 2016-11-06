@@ -28,11 +28,11 @@
             },
 
             numCourses: function() {
-                return this.$store.state.courses.length + 0;
+                return isNaN(this.$store.state.courses.length) ? 0 : parseInt(this.$store.state.courses.length);
             },
 
             numAuthors: function() {
-                return this.$store.state.authors.length + 0;
+                return isNaN(this.$store.state.authors.length) ? 0 : parseInt(this.$store.state.authors.length);
             }
 
         }
