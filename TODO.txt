@@ -3,6 +3,8 @@ BUGS:
 - deleting an author then clicking their name in the author list before it reloads lets you load that author in the edit form
   (race condition)
 
+  maybe dispatch an action like 'AUTHOR_DELETED' from the 'DELETE_AUTHOR' mutation and then the form can use that to update the list
+
 
 FEATURES:
 

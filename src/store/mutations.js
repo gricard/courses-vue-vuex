@@ -28,8 +28,10 @@ export const mutations = {
         state.ajaxCallsInProgress++;
     },
 
-    DECREMENT_AJAX_CALLS (state) {
+    DECREMENT_AJAX_CALLS (state, params) {
         state.ajaxCallsInProgress--;
+
+        if (params && params.error) state.ajaxError = params.error;
     },
 
     SET_LOADING_FRAME (state, { frame }) {
