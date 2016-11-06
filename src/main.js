@@ -42,12 +42,22 @@ let app = new Vue({
     }
 });
 
-// use promises to execute load actions before mounting the app
+// use promises to start load actions before mounting the app
 import {loadCourses, loadAuthors } from './store/actionCreators';
+import toastr from 'toastr';
 console.log('start loading data');
-store.dispatch(loadCourses()).then(nothing =>
-    store.dispatch(loadAuthors()).then( nothing2 => {
-        app.$mount('#app');
-        console.log('app started');
-    })
-);
+store.dispatch(loadCourses()).then(nothing => {
+    console.log('courses loaded');
+    store.dispatch(loadAuthors()).then(nothing2 => {
+        console.log('authors loaded');
+    }).catch(error => {
+        toastr.error(error);
+    });
+}).catch(error => {
+    toastr.error(error);
+});
+
+// load the app
+// don't rely on the load calls completing in order to start because they could fail
+app.$mount('#app');
+console.log('app started');
