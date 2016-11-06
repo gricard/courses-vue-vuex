@@ -3,7 +3,7 @@ import CourseApi  from '../api/mockCourseApi'
 import AuthorApi  from '../api/mockAuthorApi'
 import {
     beginAjaxCall, ajaxCallError, ajaxCallSuccess,
-    loadCourses, loadCoursesSuccess, loadCoursesFailure, fetchCourse,
+    loadCourses, loadCoursesSuccess, loadCoursesFailure, fetchCourse, updateCourseSuccess, createCourseSuccess, saveCourseFailure,
     loadAuthors, loadAuthorsSuccess, loadAuthorsFailure
 } from './actionCreators.js';
 
@@ -68,26 +68,39 @@ export const actions = {
         commit('SET_COURSE', { course });
     },
 
-    SAVE_COURSE: ({ commit, dispatch, state }, course) => {
+    SAVE_COURSE: ({ commit, dispatch, state }, { course }) => {
         dispatch(beginAjaxCall()); // increment ajax call count
         commit('SET_SAVING', true);
         return CourseApi.saveCourse(course).then(course => {
-//            course.id ? dispatch('UPDATE_COURSE_SUCCESS') : dispatch('CREATE_COURSE_SUCCESS');
-            commit('SET_COURSE', { course });
-            dispatch(ajaxCallSuccess());
-
-            // update state flags for form
-            commit('SET_SAVING', false);
-            commit('SET_DIRTY', false);
-
+            return course.id ? dispatch(updateCourseSuccess(course)) : dispatch(createCourseSuccess(course));
             // replace in course list?
-            //course.id ? dispatch(updateCourseSuccess(course)) : dispatch(createCourseSuccess(course));
         }).catch(error => {
-//            dispatch(ajaxCallError(error));
-            console.log('SAVE_COURSE: caught error', error);
-            dispatch(ajaxCallError(error), {error: error});
-            commit('SET_SAVING', false );
+            return dispatch(saveCourseFailure(error));
         });
+    },
+
+    SAVE_COURSE_FAILURE: ({ commit, dispatch, state }, { error }) => {
+        commit('SET_SAVING', false );
+        dispatch(ajaxCallError(error));
+        throw(error);
+    },
+
+    CREATE_COURSE_SUCCESS: ({ commit, dispatch, state }, { course }) => {
+        commit('SET_COURSE', {course});
+        dispatch(ajaxCallSuccess());
+
+        // update state flags for form
+        commit('SET_SAVING', false);
+        commit('SET_DIRTY', false);
+    },
+
+    UPDATE_COURSE_SUCCESS: ({ commit, dispatch, state }, { course} ) => {
+        commit('SET_COURSE', {course});
+        dispatch(ajaxCallSuccess());
+
+        // update state flags for form
+        commit('SET_SAVING', false);
+        commit('SET_DIRTY', false);
     },
 
     DELETE_COURSE: ({ commit, dispatch, state }, course) => {

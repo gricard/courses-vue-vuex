@@ -41,6 +41,14 @@ export function fetchCourse(id) {
     return { type: types.FETCH_COURSE, id };
 }
 
+export function saveCourse(course) {
+    return {type: types.SAVE_COURSE, course};
+}
+
+export function saveCourseFailure(error) {
+    return {type: types.SAVE_COURSE_FAILURE, error};
+}
+
 export function createCourseSuccess(course) {
     return {type: types.CREATE_COURSE_SUCCESS, course};
 }

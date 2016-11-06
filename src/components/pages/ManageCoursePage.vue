@@ -18,7 +18,7 @@
     import CourseForm from '../CourseForm';
     import toastr from 'toastr';
     import { mapState } from 'vuex';
-    import { fetchCourse } from '../../store/actionCreators';
+    import { fetchCourse, saveCourse } from '../../store/actionCreators';
 
     export default {
         name: 'ManageCoursePage',
@@ -107,7 +107,7 @@
                     return;
                 }
 
-                this.$store.dispatch('SAVE_COURSE', this.$store.state.course)
+                this.$store.dispatch(saveCourse(this.$store.state.course))
                     .then(() => {
                         this.redirectSave();
                     })
