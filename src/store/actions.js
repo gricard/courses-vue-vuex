@@ -89,18 +89,20 @@ export const actions = {
         commit('SET_COURSE', {course});
         dispatch(ajaxCallSuccess());
 
-        // update state flags for form
+        // update form status
         commit('SET_SAVING', false);
         commit('SET_DIRTY', false);
+        commit('SET_ERRORS', {});
     },
 
     UPDATE_COURSE_SUCCESS: ({ commit, dispatch, state }, { course} ) => {
         commit('SET_COURSE', {course});
         dispatch(ajaxCallSuccess());
 
-        // update state flags for form
+        // update form status
         commit('SET_SAVING', false);
         commit('SET_DIRTY', false);
+        commit('SET_ERRORS', {});
     },
 
     DELETE_COURSE: ({ commit, dispatch, state }, course) => {
@@ -125,17 +127,6 @@ export const actions = {
 
 
     //// AUTHORS
-//    LOAD_AUTHORS: ({ commit, dispatch, state }) => {
-//        dispatch(beginAjaxCall()); // increment ajax call count
-//        return AuthorApi.getAllAuthors().then(authors => {
-//            commit('SET_AUTHORS', { authors });
-//            dispatch(ajaxCallSuccess());
-//        }).catch(error => {
-//            dispatch(ajaxCallError(error));
-//            throw(error);
-//        });
-//    },
-
     LOAD_AUTHORS: ({ commit, dispatch, state }) => {
         dispatch(beginAjaxCall()); // increment ajax call count
         return AuthorApi.getAllAuthors().then(authors => {
