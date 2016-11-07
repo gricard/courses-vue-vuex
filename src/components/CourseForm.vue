@@ -41,6 +41,7 @@
 
         <br>
 
+        <!-- TODO move this into a custom component since we'd have to have the same logic in the author form as well -->
         <input
             type="submit"
             :disabled="saving || Object.keys(this.errors).length > 0"
