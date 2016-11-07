@@ -43,17 +43,15 @@
 
         <input
             type="submit"
-            :disabled="saving"
+            :disabled="saving || Object.keys(this.errors).length > 0"
             :value="saving ? 'Saving...' : 'Save'"
             class="btn btn-primary saver margin-r-5"
             @click.prevent="onSave"
         />
 
-        &nbsp;&nbsp;
-
         <input
             type="submit"
-            :disabled="deleting"
+            :disabled="deleting || !course.id"
             :value="deleting ? 'Deleting...' : 'Delete'"
             class="btn deleter"
             @click.prevent="onDelete"
@@ -64,10 +62,6 @@
 </template>
 
 <script>
-//    import SelectInput from './common/SelectInput';
-
-//    import { mapMutations } from 'vuex'
-
     export default {
         name: 'CourseForm',
 
@@ -81,12 +75,6 @@
             saving: Boolean,
             deleting: Boolean
         },
-//
-        // locally included components
-//        components: {
-////            'SelectInput': SelectInput
-//        },
-
 
         mounted() {
             // after the next DOM update (when everything should be rendered)
@@ -97,20 +85,10 @@
         },
 
         computed: {
-//            saving() {
-//                return this.$store.state.saving;
-//            },
-//
-//            deleting() {
-//                return this.$store.state.deleting;
-//            }
+
         },
 
         methods: {
-
-            // mapMutations could be used here
-            // change these to dispatch actions instead
-            // unify state of this form in the store instead of storing in both places
 
         }
     };
