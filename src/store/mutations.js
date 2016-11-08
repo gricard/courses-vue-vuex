@@ -54,7 +54,7 @@ export const mutations = {
         state.dirty = dirty;
     },
 
-    loadCourse (state, course) {
+    LOAD_COURSE (state, course) {
         state.course = course;
     },
 

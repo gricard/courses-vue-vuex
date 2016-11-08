@@ -32,13 +32,19 @@
         },
 
         beforeMount () {
-            this.$store.dispatch(fetchCourse(this.$route.params.id))
-                .then(() => {
-                    // load course record if we don't already have it
-                    if (!this.$store.state.course.id || (this.course && this.$store.state.course && this.course.id != this.$store.state.course.id)) {
-                        this.$store.commit('loadCourse', this.course);
-                    }
-            });
+            // clear errors
+            this.$store.dispatch('UPDATE_ERRORS', {});
+
+
+            if (this.$route.params.id > 0) {
+                this.$store.dispatch(fetchCourse(this.$route.params.id))
+                    .then(() => {
+                        // load course record if we don't already have it
+
+                        // TODO shouldn't these call an action??
+                        this.$store.commit('LOAD_COURSE', this.course);
+                    });
+            }
         },
 
         // confirm leaving page if the form is dirty
@@ -60,19 +66,6 @@
 
         methods: {
             //// Helper/utility functions
-            courseFormIsValid() {
-                let formIsValid = true;
-                let errors = this.$store.state.errors || {};
-
-                if (this.$store.state.course.title.length < 5) {
-                    errors.title = 'Title must be at least 5 characters.';
-                    formIsValid = false;
-                }
-
-                this.$store.commit('SET_ERRORS', errors);
-                return formIsValid;
-            },
-
             redirectSave() {
                 this.redirect('Course Saved');
             },
@@ -87,6 +80,20 @@
                 this.$router.push({name: 'courselist'});
             },
 
+            courseFormIsValid() {
+                let formIsValid = true;
+                let errors = this.$store.state.errors || {};
+
+                if (this.$store.state.course.title.length < 5) {
+                    errors.title = 'Title must be at least 5 characters.';
+                    formIsValid = false;
+                } else {
+                    delete errors["title"];
+                }
+
+                this.$store.dispatch('UPDATE_ERRORS', errors);
+                return formIsValid;
+            },
 
             //// Form handlers
             handleUpdateCourseState(event) {
@@ -98,8 +105,9 @@
                 // if user changes it and then edits it back to normal the form will still think it's dirty
 
                 // mark state as dirty so we can trigger a leave page handler
-                this.$store.commit('SET_DIRTY', true);
-                return this.$store.commit('SET_COURSE', {course: course});
+                this.$store.commit('SET_DIRTY', true); // TODO this should be tracking the original value
+                this.$store.commit('SET_COURSE', {course: course});
+                return this.courseFormIsValid();
             },
 
             handleSaveCourse() {
@@ -128,16 +136,7 @@
         },
 
         computed: {
-            errors () {
-                return this.$store.state.errors;
-            },
-
-            course () {
-                return this.$store.state.course;
-            },
-
             authors() {
-                console.log('got authors for course form', this.$store.state.authors);
                 const authorList = Array.from(this.$store.state.authors);
                 return authorList.map(author => {
                     return {
@@ -151,6 +150,8 @@
             ...mapState([
                 'saving',
                 'deleting',
+                'errors',
+                'course'
             ])
         }
     }

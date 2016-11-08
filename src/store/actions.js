@@ -8,6 +8,13 @@ import {
 } from './actionCreators.js';
 
 export const actions = {
+    UPDATE_ERRORS: ({ commit, dispatch, state }, errors) => {
+        // make a copy since vue will not handle it reactively unless the entire object itself changes
+        errors = Vue.util.extend({}, errors);
+
+        commit('SET_ERRORS', errors);
+    },
+
     BEGIN_AJAX_CALL: ({ commit, dispatch, state }) => {
         // loading mask?
         commit('INCREMENT_AJAX_CALLS');
