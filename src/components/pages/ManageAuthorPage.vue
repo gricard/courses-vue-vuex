@@ -33,6 +33,8 @@
         beforeMount () {
             // clear errors
             this.$store.dispatch('UPDATE_ERRORS', {});
+            // clear previous form data
+            this.$store.commit('LOAD_AUTHOR', {});
 
             if (this.$route.params.id && this.$route.params.id.length > 0) {
                 this.$store.dispatch(fetchAuthor(this.$route.params.id))
