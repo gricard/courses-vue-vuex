@@ -129,18 +129,12 @@
         },
 
         computed: {
-            errors () {
-                return this.$store.state.errors;
-            },
-
-            author () {
-                return this.$store.state.author;
-            },
-
             // mix the getters into computed with object spread operator
             ...mapState([
                 'saving',
                 'deleting',
+                'errors',
+                'author'
             ])
         }
     }
