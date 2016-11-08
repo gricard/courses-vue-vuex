@@ -25,7 +25,7 @@
 
             <input
                 type="submit"
-                :disabled="saving"
+                :disabled="saving || Object.keys(this.errors).length > 0"
                 :value="saving ? 'Saving...' : 'Save'"
                 class="btn btn-primary saver margin-r-5"
                 @click.prevent="onSave"
@@ -35,7 +35,7 @@
 
             <input
                 type="submit"
-                :disabled="deleting"
+                :disabled="deleting || !author.id"
                 :value="deleting ? 'Deleting...' : 'Delete'"
                 class="btn deleter"
                 @click.prevent="onDelete"

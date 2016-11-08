@@ -58,7 +58,7 @@ export const mutations = {
         state.course = course;
     },
 
-    loadAuthor(state, author) {
+    LOAD_AUTHOR(state, author) {
         state.author = author;
     }
 

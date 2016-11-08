@@ -31,13 +31,17 @@
         },
 
         beforeMount () {
-            this.$store.dispatch(fetchAuthor(this.$route.params.id))
-                .then(() => {
-                    // load author record if we don't already have it
-                    if (!this.$store.state.author.id || (this.author && this.$store.state.author && this.author.id != this.$store.state.author.id)) {
-                        this.$store.commit('loadAuthor', this.author);
-                    }
-                });
+            // clear errors
+            this.$store.dispatch('UPDATE_ERRORS', {});
+
+            if (this.$route.params.id && this.$route.params.id.length > 0) {
+                this.$store.dispatch(fetchAuthor(this.$route.params.id))
+                    .then(() => {
+                        // load author record if we don't already have it
+                        // TODO shouldn't these call an action??
+                        this.$store.commit('LOAD_AUTHOR', this.author);
+                    });
+            }
         },
 
         // confirm leaving page if the form is dirty
@@ -61,19 +65,6 @@
 
         methods: {
             //// Helper/utility functions
-            authorFormIsValid() {
-                let formIsValid = true;
-                let errors = this.$store.state.errors || {};
-
-                if (this.$store.state.author.firstName.length < 3) {
-                    errors.firstName = 'First name must be at least 3 characters.';
-                    formIsValid = false;
-                }
-
-                this.$store.commit('SET_ERRORS', errors);
-                return formIsValid;
-            },
-
             redirectSave() {
                 this.redirect('Author Saved');
             },
@@ -88,11 +79,26 @@
                 this.$router.push({name: 'authorlist'});
             },
 
+            authorFormIsValid() {
+                let formIsValid = true;
+                const errors = this.$store.state.errors || {};
+
+                if (this.$store.state.author.firstName.length < 3) {
+                    errors.firstName = 'First name must be at least 3 characters.';
+                    formIsValid = false;
+                } else {
+                    delete errors["firstName"];
+                }
+
+                this.$store.commit('SET_ERRORS', errors);
+                return formIsValid;
+            },
+
 
             //// Form handlers
             handleUpdateAuthorState(event) {
                 const field = event.target.name;
-                let author = this.$store.state.author;
+                const author = this.$store.state.author;
                 author[field] = event.target.value;
 
                 // TODO keep a copy of the original data and actually compare changes instead of just assuming it changed
@@ -100,7 +106,8 @@
 
                 // mark state as dirty so we can trigger a leave page handler
                 this.$store.commit('SET_DIRTY', true);
-                return this.$store.commit('SET_AUTHOR', {author: author});
+                this.$store.commit('SET_AUTHOR', {author: author});
+                return this.authorFormIsValid();
             },
 
             handleSaveAuthor() {
