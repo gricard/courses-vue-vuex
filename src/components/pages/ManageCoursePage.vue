@@ -36,7 +36,7 @@
             this.$store.dispatch('UPDATE_ERRORS', {});
 
 
-            if (this.$route.params.id > 0) {
+            if (this.$route.params.id && this.$route.params.id.length > 0) {
                 this.$store.dispatch(fetchCourse(this.$route.params.id))
                     .then(() => {
                         // load course record if we don't already have it
@@ -82,9 +82,9 @@
 
             courseFormIsValid() {
                 let formIsValid = true;
-                let errors = this.$store.state.errors || {};
+                const errors = this.$store.state.errors || {};
 
-                if (this.$store.state.course.title.length < 5) {
+                if (this.$store.state.course.title && this.$store.state.course.title.length < 5) {
                     errors.title = 'Title must be at least 5 characters.';
                     formIsValid = false;
                 } else {
@@ -98,7 +98,7 @@
             //// Form handlers
             handleUpdateCourseState(event) {
                 const field = event.target.name;
-                let course = this.$store.state.course;
+                const course = this.$store.state.course;
                 course[field] = event.target.value;
 
                 // TODO keep a copy of the original data and actually compare changes instead of just assuming it changed
