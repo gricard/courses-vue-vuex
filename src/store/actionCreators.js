@@ -3,14 +3,14 @@ import * as types from './actionTypes';
 //// AJAX
 
 export function beginAjaxCall() {
-    console.log('beginAjaxCall', types.BEGIN_AJAX_CALL);
+//    console.log('beginAjaxCall', types.BEGIN_AJAX_CALL);
     return {type: types.BEGIN_AJAX_CALL};
 }
 
 // decrements ajax call count and triggers error display
 export function ajaxCallError(error='unknown error') {
-    console.log('ajaxCallError', types.AJAX_CALL_ERROR);
-    console.log('error', error);
+//    console.log('ajaxCallError', types.AJAX_CALL_ERROR);
+//    console.log('error', error);
     return {
         type: types.AJAX_CALL_ERROR,
         error: 'Server error: ' + error
@@ -18,7 +18,7 @@ export function ajaxCallError(error='unknown error') {
 }
 
 export function ajaxCallSuccess() {
-    console.log('ajaxCallSuccess', types.AJAX_CALL_SUCCESS);
+//    console.log('ajaxCallSuccess', types.AJAX_CALL_SUCCESS);
     return {type: types.AJAX_CALL_SUCCESS};
 }
 
