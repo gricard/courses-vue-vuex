@@ -66,16 +66,7 @@
 
         methods: {
             //// Helper/utility functions
-            redirectSave() {
-                this.redirect('Course Saved');
-            },
-
-            redirectDelete() {
-                this.redirect('Course Deleted');
-            },
-
-            redirect(msg) {
-                toastr.success(msg);
+            redirect() {
                 // redirect to courses page after save
                 this.$router.push({name: 'courselist'});
             },
@@ -118,7 +109,7 @@
 
                 this.$store.dispatch(saveCourse(this.$store.state.course))
                     .then(() => {
-                        this.redirectSave();
+                        this.redirect();
                     })
                     .catch(error => {
                         toastr.error(error);
@@ -128,7 +119,7 @@
             handleDeleteCourse(event) {
                 this.$store.dispatch('DELETE_COURSE', this.$store.state.course)
                     .then(course => {
-                        this.redirectDelete();
+                        this.redirect();
                     })
                     .catch(error => {
                         toastr.error(error);

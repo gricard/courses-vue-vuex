@@ -57,6 +57,10 @@ export function updateCourseSuccess(course) {
     return {type: types.UPDATE_COURSE_SUCCESS, course};
 }
 
+export function saveCourseSuccess(course) {
+    return {type: types.SAVE_COURSE_SUCCESS, course};
+}
+
 export function deleteCourseSuccess(course) {
     //console.log('deleteCourseSuccess');
     return {type: types.DELETE_COURSE_SUCCESS, course};

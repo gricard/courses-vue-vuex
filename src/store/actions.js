@@ -5,7 +5,7 @@ import toastr from 'toastr';
 
 import {
     beginAjaxCall, ajaxCallError, ajaxCallSuccess,
-    loadCourses, loadCoursesSuccess, loadCoursesFailure, fetchCourse, updateCourseSuccess, createCourseSuccess, saveCourseFailure,
+    loadCourses, loadCoursesSuccess, loadCoursesFailure, fetchCourse, saveCourseSuccess, saveCourseFailure,
     loadAuthors, loadAuthorsSuccess, loadAuthorsFailure
 } from './actionCreators.js';
 
@@ -82,7 +82,8 @@ export const actions = {
         dispatch(beginAjaxCall()); // increment ajax call count
         commit('SET_SAVING', true);
         return CourseApi.saveCourse(course).then(course => {
-            return course.id ? dispatch(updateCourseSuccess(course)) : dispatch(createCourseSuccess(course));
+            //return course.id ? dispatch(updateCourseSuccess(course)) : dispatch(createCourseSuccess(course));
+            return dispatch(saveCourseSuccess(course));
             // replace in course list?
         }).catch(error => {
             return dispatch(saveCourseFailure(error));
@@ -95,9 +96,19 @@ export const actions = {
         throw(error);
     },
 
+    SAVE_COURSE_SUCCESS: ({ commit, dispatch, state }, { course }) => {
+        commit('SET_COURSE', {course});
+        dispatch(ajaxCallSuccess("Saved course"));
+
+        // update form status
+        commit('SET_SAVING', false);
+        commit('SET_DIRTY', false);
+        commit('SET_ERRORS', {});
+    },
+
     CREATE_COURSE_SUCCESS: ({ commit, dispatch, state }, { course }) => {
         commit('SET_COURSE', {course});
-        dispatch(ajaxCallSuccess());
+        dispatch(ajaxCallSuccess("Created course"));
 
         // update form status
         commit('SET_SAVING', false);
@@ -107,7 +118,7 @@ export const actions = {
 
     UPDATE_COURSE_SUCCESS: ({ commit, dispatch, state }, { course} ) => {
         commit('SET_COURSE', {course});
-        dispatch(ajaxCallSuccess());
+        dispatch(ajaxCallSuccess("Updated course"));
 
         // update form status
         commit('SET_SAVING', false);
@@ -126,7 +137,7 @@ export const actions = {
             course = {};
             commit('SET_COURSE', { course });
             // update ajax success
-            dispatch(ajaxCallSuccess());
+            dispatch(ajaxCallSuccess("Deleted course"));
         }).catch(error => {
             // update form status
             commit('SET_DELETING', false);
@@ -183,7 +194,7 @@ export const actions = {
         return AuthorApi.saveAuthor(author).then(author => {
             //            author.id ? dispatch('UPDATE_AUTHOR_SUCCESS') : dispatch('CREATE_AUTHOR_SUCCESS');
             commit('SET_AUTHOR', { author });
-            dispatch(ajaxCallSuccess());
+            dispatch(ajaxCallSuccess("Saved author"));
 
             // update form status
             commit('SET_SAVING', false);
