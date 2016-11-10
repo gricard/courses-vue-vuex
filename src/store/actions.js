@@ -6,7 +6,7 @@ import toastr from 'toastr';
 import {
     beginAjaxCall, ajaxCallError, ajaxCallSuccess,
     loadCourses, loadCoursesSuccess, loadCoursesFailure, fetchCourse, saveCourseSuccess, saveCourseFailure,
-    loadAuthors, loadAuthorsSuccess, loadAuthorsFailure
+    loadAuthors, loadAuthorsSuccess, loadAuthorsFailure, fetchAuthor, saveAuthorSuccess, saveAuthorFailure,
 } from './actionCreators.js';
 
 export const actions = {
@@ -177,7 +177,7 @@ export const actions = {
         // ensure we have data load if we load the author page directly
         if (authors.length < 1) {
             return dispatch(loadAuthors()).then(something => {
-                dispatch('FETCH_AUTHOR', { id: id });
+                dispatch(fetchAuthor(id));
             });
         }
 
@@ -197,19 +197,28 @@ export const actions = {
         commit('SET_SAVING', true);
         return AuthorApi.saveAuthor(author).then(author => {
             //            author.id ? dispatch('UPDATE_AUTHOR_SUCCESS') : dispatch('CREATE_AUTHOR_SUCCESS');
-            commit('SET_AUTHOR', { author });
-            dispatch(ajaxCallSuccess("Saved author"));
-
-            // update form status
-            commit('SET_SAVING', false);
-            commit('SET_DIRTY', false);
-
+            return dispatch(saveAuthorSuccess(author));
             // replace in author list?
             //            author.id ? dispatch(updateAuthorSuccess(author)) : dispatch(createAuthorSuccess(author));
         }).catch(error => {
-            dispatch(ajaxCallError(error));
-            commit('SET_SAVING', false );
+            dispatch(saveAuthorFailure(error));
         });
+    },
+
+    SAVE_AUTHOR_FAILURE: ({ commit, dispatch, state }, { error }) => {
+        commit('SET_SAVING', false );
+        dispatch(ajaxCallError(error));
+        throw(error);
+    },
+
+    SAVE_AUTHOR_SUCCESS: ({ commit, dispatch, state }, { author }) => {
+        commit('SET_AUTHOR', {author});
+        dispatch(ajaxCallSuccess("Saved author"));
+
+        // update form status
+        commit('SET_SAVING', false);
+        commit('SET_DIRTY', false);
+        commit('SET_ERRORS', {});
     },
 
     DELETE_AUTHOR: ({ commit, dispatch, state }, author) => {

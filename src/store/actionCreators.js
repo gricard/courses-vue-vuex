@@ -59,16 +59,16 @@ export function saveCourseFailure(error) {
     return {type: types.SAVE_COURSE_FAILURE, error};
 }
 
+export function saveCourseSuccess(course) {
+    return {type: types.SAVE_COURSE_SUCCESS, course};
+}
+
 export function createCourseSuccess(course) {
     return {type: types.CREATE_COURSE_SUCCESS, course};
 }
 
 export function updateCourseSuccess(course) {
     return {type: types.UPDATE_COURSE_SUCCESS, course};
-}
-
-export function saveCourseSuccess(course) {
-    return {type: types.SAVE_COURSE_SUCCESS, course};
 }
 
 export function deleteCourseSuccess(course) {
@@ -98,6 +98,14 @@ export function loadAuthorsFailure(error) {
 
 export function fetchAuthor(id) {
     return { type: types.FETCH_AUTHOR, id };
+}
+
+export function saveAuthorFailure(error) {
+    return {type: types.SAVE_AUTHOR_FAILURE, error};
+}
+
+export function saveAuthorSuccess(author) {
+    return {type: types.SAVE_AUTHOR_SUCCESS, author};
 }
 
 export function createAuthorSuccess(author) {
