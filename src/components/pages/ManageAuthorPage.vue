@@ -83,6 +83,13 @@
                     delete errors["firstName"];
                 }
 
+                if (this.$store.state.author.lastName && this.$store.state.author.lastName.length < 3) {
+                    errors.lastName = 'Last name must be at least 3 characters.';
+                    formIsValid = false;
+                } else {
+                    delete errors["lastName"];
+                }
+
                 this.$store.dispatch('UPDATE_ERRORS', errors);
                 return formIsValid;
             },
