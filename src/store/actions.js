@@ -17,6 +17,10 @@ export const actions = {
         commit('SET_ERRORS', errors);
     },
 
+    RESET_ERRORS: ({ commit, dispatch, state }) => {
+        commit('SET_ERRORS', {});
+    },
+
     BEGIN_AJAX_CALL: ({ commit, dispatch, state }) => {
         // loading mask?
         commit('INCREMENT_AJAX_CALLS');

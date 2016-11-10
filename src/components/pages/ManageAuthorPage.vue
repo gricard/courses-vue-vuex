@@ -17,7 +17,7 @@
     import AuthorForm from '../AuthorForm';
     import toastr from 'toastr';
     import { mapState } from 'vuex';
-    import { fetchAuthor } from '../../store/actionCreators';
+    import { fetchAuthor, resetErrors } from '../../store/actionCreators';
 
     export default {
         name: 'ManageAuthorPage',
@@ -32,7 +32,7 @@
 
         beforeMount () {
             // clear errors
-            this.$store.dispatch('UPDATE_ERRORS', {});
+            this.$store.dispatch(resetErrors());
 
             if (this.$route.params.id && this.$route.params.id.length > 0) {
                 this.$store.dispatch(fetchAuthor(this.$route.params.id))

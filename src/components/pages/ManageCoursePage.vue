@@ -18,7 +18,7 @@
     import CourseForm from '../CourseForm';
     import toastr from 'toastr';
     import { mapState } from 'vuex';
-    import { fetchCourse, saveCourse } from '../../store/actionCreators';
+    import { fetchCourse, saveCourse, resetErrors } from '../../store/actionCreators';
 
     export default {
         name: 'ManageCoursePage',
@@ -33,7 +33,7 @@
 
         beforeMount () {
             // clear errors
-            this.$store.dispatch('UPDATE_ERRORS', {});
+            this.$store.dispatch(resetErrors());
 
             if (this.$route.params.id && this.$route.params.id.length > 0) {
                 this.$store.dispatch(fetchCourse(this.$route.params.id))

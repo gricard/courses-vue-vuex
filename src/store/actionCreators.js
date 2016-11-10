@@ -23,6 +23,16 @@ export function ajaxCallSuccess(msg) {
 }
 
 
+//// ERROR STATE
+export function resetErrors() {
+    return {type: types.RESET_ERRORS};
+}
+
+export function updateErrors(errors) {
+    return {type: types.UPDATE_ERRORS, errors: errors};
+}
+
+
 //// COURSES
 
 export function loadCourses() {

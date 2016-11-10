@@ -32,3 +32,4 @@ export const AJAX_CALL_SUCCESS = 'AJAX_CALL_SUCCESS';
 
 //// MISC
 export const UPDATE_ERRORS = 'UPDATE_ERRORS';
+export const RESET_ERRORS = 'RESET_ERRORS';
