@@ -37,12 +37,10 @@
             // clear previous form data
             this.$store.commit('LOAD_COURSE', {});
 
-
             if (this.$route.params.id && this.$route.params.id.length > 0) {
                 this.$store.dispatch(fetchCourse(this.$route.params.id))
                     .then(() => {
                         // load course record if we don't already have it
-
                         // TODO shouldn't these call an action??
                         this.$store.commit('LOAD_COURSE', this.course);
                     });
@@ -96,6 +94,7 @@
                 this.$store.dispatch('UPDATE_ERRORS', errors);
                 return formIsValid;
             },
+
 
             //// Form handlers
             handleUpdateCourseState(event) {

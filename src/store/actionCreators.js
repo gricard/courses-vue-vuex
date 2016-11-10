@@ -17,9 +17,9 @@ export function ajaxCallError(error='unknown error') {
     };
 }
 
-export function ajaxCallSuccess() {
+export function ajaxCallSuccess(msg) {
 //    console.log('ajaxCallSuccess', types.AJAX_CALL_SUCCESS);
-    return {type: types.AJAX_CALL_SUCCESS};
+    return {type: types.AJAX_CALL_SUCCESS, msg: msg};
 }
 
 

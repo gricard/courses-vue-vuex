@@ -1,4 +1,5 @@
 import delay from './delay';
+import { getCoursesByAuthor } from './mockCourseApi';
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -64,14 +65,24 @@ class AuthorApi {
     });
   }
 
-  static deleteAuthor(authorId) {
+  static deleteAuthor(author) {
+    console.log('call deleteAuthor')
     return new Promise((resolve, reject) => {
+      console.log('deleteAuthor promise');
       setTimeout(() => {
-        const indexOfAuthorToDelete = authors.findIndex(author => {
-          author.authorId == authorId;
+        const indexOfAuthorToDelete = authors.findIndex(tmpAuthor => {
+          tmpAuthor.authorId === author.id
         });
-        authors.splice(indexOfAuthorToDelete, 1);
-        resolve();
+
+        // check if the author has active courses
+        const course = getCoursesByAuthor(author.id);
+
+        if (course) {
+          reject("Cannot delete author with active courses");
+        } else {
+          authors.splice(indexOfAuthorToDelete, 1);
+          resolve("Author deleted: " + author.firstName + " " + author.lastName);
+        }
       }, delay);
     });
   }

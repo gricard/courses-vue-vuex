@@ -67,16 +67,7 @@
 
         methods: {
             //// Helper/utility functions
-            redirectSave() {
-                this.redirect('Author Saved');
-            },
-
-            redirectDelete() {
-                this.redirect('Author Deleted');
-            },
-
-            redirect(msg) {
-                toastr.success(msg);
+            redirect() {
                 // redirect to authors page after save
                 this.$router.push({name: 'authorlist'});
             },
@@ -85,14 +76,14 @@
                 let formIsValid = true;
                 const errors = this.$store.state.errors || {};
 
-                if (this.$store.state.author.firstName.length < 3) {
+                if (this.$store.state.author.firstName && this.$store.state.author.firstName.length < 3) {
                     errors.firstName = 'First name must be at least 3 characters.';
                     formIsValid = false;
                 } else {
                     delete errors["firstName"];
                 }
 
-                this.$store.commit('SET_ERRORS', errors);
+                this.$store.dispatch('UPDATE_ERRORS', errors);
                 return formIsValid;
             },
 
@@ -119,7 +110,7 @@
 
                 this.$store.dispatch('SAVE_AUTHOR', this.$store.state.author)
                     .then(() => {
-                        this.redirectSave();
+                        this.redirect();
                     })
                     .catch(error => {
                         toastr.error(error);
@@ -129,7 +120,7 @@
             handleDeleteAuthor(event) {
                 this.$store.dispatch('DELETE_AUTHOR', this.$store.state.author)
                     .then(author => {
-                        this.redirectDelete();
+                        this.redirect();
                     })
                     .catch(error => {
                         toastr.error(error);

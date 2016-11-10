@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import CourseApi  from '../api/mockCourseApi'
 import AuthorApi  from '../api/mockAuthorApi'
+import toastr from 'toastr';
+
 import {
     beginAjaxCall, ajaxCallError, ajaxCallSuccess,
     loadCourses, loadCoursesSuccess, loadCoursesFailure, fetchCourse, updateCourseSuccess, createCourseSuccess, saveCourseFailure,
@@ -20,14 +22,15 @@ export const actions = {
         commit('INCREMENT_AJAX_CALLS');
     },
 
-    AJAX_CALL_SUCCESS: ({ commit, dispatch, state }) => {
+    AJAX_CALL_SUCCESS: ({ commit, dispatch, state }, { msg }) => {
         // clear loading mask?
+        if (msg) toastr.success(msg);
         commit('DECREMENT_AJAX_CALLS');
     },
 
     AJAX_CALL_ERROR: ({ commit, dispatch, state }, {error: error}) => {
         // clear loading mask?
-        // display error?
+       toastr.error(error);
         commit('DECREMENT_AJAX_CALLS', { error });
     },
 
@@ -200,7 +203,7 @@ export const actions = {
 
         return AuthorApi.deleteAuthor(author).then(author => {
             commit('SET_DELETING', false);
-            dispatch(ajaxCallSuccess());
+            dispatch(ajaxCallSuccess("Author deleted"));
             // clear out author state
             author = {};
             commit('SET_AUTHOR', { author });

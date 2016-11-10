@@ -55,10 +55,21 @@ const generateId = (course) => {
   return replaceAll(course.title, ' ', '-');
 };
 
+export const getCoursesByAuthor = (authorId) => {
+  console.log('getting courses for author', authorId);
+  const courseList = courses.find(course => {
+    console.log('test course author id', course.authorId);
+    return course.authorId == authorId
+  });
+  console.log('getCoursesByAuthor', courseList);
+  return courseList === -1 ? [] : courseList;
+};
+
 class CourseApi {
   static getAllCourses() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
+//        reject("cannot load courses");
         resolve(Object.assign([], courses));
       }, delay);
     });
