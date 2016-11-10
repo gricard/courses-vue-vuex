@@ -10,7 +10,6 @@ FEATURES:
 
 - action creator functions (started)
 - courseActions.test.js implementation
-- form validation
 
 - code-splitting    http://vuejs.org/guide/components.html#Async-Components
 - vue-focus     https://github.com/simplesmiler/vue-focus

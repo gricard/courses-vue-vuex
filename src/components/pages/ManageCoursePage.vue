@@ -83,6 +83,27 @@
                     delete errors["title"];
                 }
 
+                if (this.$store.state.course.category && this.$store.state.course.category.length < 5) {
+                    errors.category = 'Category must be at least 5 characters.';
+                    formIsValid = false;
+                } else {
+                    delete errors["category"];
+                }
+
+                if (this.$store.state.course.length && this.$store.state.course.length.length < 4  ) {
+                    errors.title = 'Length must be at least 4 characters.';
+                    formIsValid = false;
+                } else {
+                    delete errors["length"];
+                }
+
+                if (this.$store.state.course.length && !this.$store.state.course.length.match(/[0-9\;]/)  ) {
+                    errors.length = 'Length must be in the format HH:MM.';
+                    formIsValid = false;
+                } else {
+                    delete errors["length"];
+                }
+
                 this.$store.dispatch('UPDATE_ERRORS', errors);
                 return formIsValid;
             },
