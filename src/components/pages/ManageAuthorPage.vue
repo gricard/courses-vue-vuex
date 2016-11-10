@@ -33,16 +33,17 @@
         beforeMount () {
             // clear errors
             this.$store.dispatch('UPDATE_ERRORS', {});
-            // clear previous form data
-            this.$store.commit('LOAD_AUTHOR', {});
 
             if (this.$route.params.id && this.$route.params.id.length > 0) {
                 this.$store.dispatch(fetchAuthor(this.$route.params.id))
                     .then(() => {
                         // load author record if we don't already have it
-                        // TODO shouldn't these call an action??
-                        this.$store.commit('LOAD_AUTHOR', this.author);
+                        // already handled in fetchAuthor (this.author is the copy in the store)
+                        //this.$store.commit('LOAD_AUTHOR', this.author);
                     });
+            } else {
+                // clear previous form data
+                this.$store.commit('LOAD_AUTHOR', {});
             }
         },
 

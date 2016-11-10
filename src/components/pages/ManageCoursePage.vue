@@ -34,16 +34,17 @@
         beforeMount () {
             // clear errors
             this.$store.dispatch('UPDATE_ERRORS', {});
-            // clear previous form data
-            this.$store.commit('LOAD_COURSE', {});
 
             if (this.$route.params.id && this.$route.params.id.length > 0) {
                 this.$store.dispatch(fetchCourse(this.$route.params.id))
                     .then(() => {
                         // load course record if we don't already have it
-                        // TODO shouldn't these call an action??
-                        this.$store.commit('LOAD_COURSE', this.course);
+                        // already handled via fetchCourse (this.course is the copy in the store)
+                        //this.$store.commit('LOAD_COURSE', this.course);
                     });
+            } else {
+                // clear previous form data
+                this.$store.commit('LOAD_COURSE', {});
             }
         },
 
