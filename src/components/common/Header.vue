@@ -8,18 +8,18 @@
             |
             <router-link to="/about">About</router-link>
 
-            <LoadingDots v-if="loading" interval=100 dots=20 />
+            <Spinner :show="loading"></Spinner>
     </nav>
 </template>
 
 <script>
-    import LoadingDots from './LoadingDots'
+    import Spinner from './Spinner.vue'
 
     export default {
         name: 'Header',
 
         components: {
-            'LoadingDots': LoadingDots
+            'Spinner': Spinner
         },
 
         computed: {
