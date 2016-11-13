@@ -15,7 +15,6 @@ FEATURES:
 - courseActions.test.js implementation
 
 - maintain data in local storage
-- code-splitting    http://vuejs.org/guide/components.html#Async-Components
 - vue-focus     https://github.com/simplesmiler/vue-focus
 
 
