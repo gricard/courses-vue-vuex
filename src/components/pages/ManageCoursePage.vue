@@ -104,7 +104,7 @@
                     delete errors["length"];
                 }
 
-                this.$store.dispatch('UPDATE_ERRORS', errors);
+                this.$store.dispatch('UPDATE_ERRORS',{errors});
                 return formIsValid;
             },
 

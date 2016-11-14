@@ -91,7 +91,7 @@
                     delete errors["lastName"];
                 }
 
-                this.$store.dispatch('UPDATE_ERRORS', errors);
+                this.$store.dispatch('UPDATE_ERRORS', {errors});
                 return formIsValid;
             },
 

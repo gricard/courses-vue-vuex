@@ -12,7 +12,16 @@ BUGS:
 FEATURES:
 
 - action creator functions (started)
+    - discern need for action creators
+        - if it's just a simple state change, we probably don't need them
+            (saving, deleting, dirty, etc.)
+
 - courseActions.test.js implementation
+    X initial action tests
+    - mutation tests
+    - action tests
+    - api tests
+
 
 - maintain data in local storage
 - vue-focus     https://github.com/simplesmiler/vue-focus

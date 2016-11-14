@@ -10,7 +10,7 @@ import {
 } from './actionCreators.js';
 
 export const actions = {
-    UPDATE_ERRORS: ({ commit, dispatch, state }, errors) => {
+    UPDATE_ERRORS: ({ commit, dispatch, state }, {errors}) => {
         // make a copy since vue will not handle it reactively unless the entire object itself changes
         errors = Vue.util.extend({}, errors);
 
