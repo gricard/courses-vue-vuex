@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import CourseApi  from '../api/mockCourseApi'
 import AuthorApi  from '../api/mockAuthorApi'
 import toastr from 'toastr';
@@ -12,7 +11,7 @@ import {
 export const actions = {
     UPDATE_ERRORS: ({ commit, dispatch, state }, {errors}) => {
         // make a copy since vue will not handle it reactively unless the entire object itself changes
-        errors = Vue.util.extend({}, errors);
+        errors = Object.assign({}, errors)
 
         commit('SET_ERRORS', errors);
     },
@@ -43,10 +42,13 @@ export const actions = {
     },
 
     LOAD_COURSES: ({ commit, dispatch, state }) => {
+//        console.log('BEGIN AJAX CALL');
         dispatch(beginAjaxCall()); // increment ajax call count
         return CourseApi.getAllCourses().then(courses => {
+//            console.log('AJAX CALL SUCCESS');
             dispatch(loadCoursesSuccess(courses));
         }).catch(error => {
+//            console.log('AJAX CALL FAILURE');
             dispatch(loadCoursesFailure(error));
         });
     },
@@ -76,7 +78,7 @@ export const actions = {
 
         // clone it so it's not a reference
         // so that when we edit the form we are not editing the course in the course list also
-        course = Vue.util.extend({}, course);
+        course = Object.assign({}, course)
 
         // set the state
         commit('SET_COURSE', { course });
@@ -186,7 +188,7 @@ export const actions = {
 
         // clone it so it's not a reference
         // so that when we edit the form we are not editing the author in the author list also
-        author = Vue.util.extend({}, author);
+        author = Object.assign({}, author)
 
         // set the state
         commit('SET_AUTHOR', { author });
