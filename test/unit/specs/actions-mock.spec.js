@@ -139,35 +139,27 @@ const actionCreators = actionCreatorsInjector({
 //}
 
 
-describe('actions', () => {
-    it('LOAD_COURSES', done => {
-        const courseList = Object.assign([], courses);
-        const loadError = {error: 'no error'};
+describe('Complex Mocked/Injected Actions', () => {
+    describe('LOAD_COURSES', () => {
+        it('Should dispatch actions and commit mutations', done => {
+            const courseList = Object.assign([], courses);
+            const loadError = {error: 'no error'};
 
-//        testAction(loadCourses, null, {}, [
-//        console.log('LOAD_COURSES', actions.actions.LOAD_COURSES);
-        testAction(actions.actions.LOAD_COURSES, null, state, [
-               { type: 'INCREMENT_AJAX_CALLS' },
-               { type: 'SET_COURSES', payload: courseList },
-               { type: 'DECREMENT_AJAX_CALLS' }
-           ], [
-               { name: 'BEGIN_AJAX_CALL' }
-                // no actions expected
-            ],
-            done
-        ).then(nothing => {
-            console.log('promise done');
-        }).catch(error => {
-            console.log('caught error', error);
-        });
-
-//        testAction(actions.actions.LOAD_COURSES, null, {}, [
-////            { type: 'BEGIN_AJAX_CALL' },
-//            { type: 'INCREMENT_AJAX_CALLS' },
-////            { type: 'AJAX_CALL_ERROR' },
-////            { type: 'LOAD_COURSES_FAILURE', payload: loadError },
-//            { type: 'SET_COURSES', payload: courseList },
-//            { type: 'DECREMENT_AJAX_CALLS' }
-//        ], done)
+    //        console.log('LOAD_COURSES', actions.actions.LOAD_COURSES);
+            testAction(actions.actions.LOAD_COURSES, null, state, [
+                    { type: 'INCREMENT_AJAX_CALLS' },
+                    { type: 'SET_COURSES', payload: courseList },
+                    { type: 'DECREMENT_AJAX_CALLS' }
+                ], [
+                    { name: 'BEGIN_AJAX_CALL' }
+                    // no actions expected
+                ],
+                done
+            ).then(nothing => {
+                console.log('promise done');
+            }).catch(error => {
+                console.log('caught error', error);
+            });
+        })
     })
 })
