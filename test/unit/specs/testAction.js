@@ -1,5 +1,4 @@
-// Helper for testing action with expected mutations.
-
+// Helper for testing action with expected mutations and actions
 // originally from https://vuex.vuejs.org/en/testing.html
 
 export function testAction(action, args, state, expectedMutations, expectedActions, done) {

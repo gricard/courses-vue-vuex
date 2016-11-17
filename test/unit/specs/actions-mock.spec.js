@@ -4,7 +4,7 @@
 // with inject-loader, this returns a module factory
 // that allows us to inject mocked dependencies.
 const actionsInjector = require('inject!src/store/actions');
-const actionCreatorsInjector = require('inject!src/store/actionCreators'); // TODO is this needed anymore?
+//const actionCreatorsInjector = require('inject!src/store/actionCreators'); // TODO is this needed anymore?
 
 import { beginAjaxCall, loadCourses, loadCoursesSuccess, loadCoursesFailure } from 'src/store/actionCreators';
 import * as types from 'src/store/actionTypes';
@@ -39,7 +39,7 @@ const courses = [
 const actions = actionsInjector({
     '../api/mockCourseApi': {
         getAllCourses (cb) {
-            console.log('mock getAllCourses called', arguments);
+//            console.log('mock getAllCourses called', arguments);
             //      setTimeout(() => {
             //        cb(Object.assign([], courses))
             //      }, 100)
@@ -54,58 +54,59 @@ const actions = actionsInjector({
 //                }, 100);
             });
         }
-    },
-
-    // TODO these probably don't need to be mocked then
-    './actionCreators.js': {
-        beginAjaxCall(cb) {
-//            console.log('beginAjaxCall cb', cb);
-            if (cb) {
-                setTimeout(() => {
-//                    console.log('beginAjaxCall', beginAjaxCall);
-                    cb(beginAjaxCall())
-                }, 100)
-            } else {
-                return beginAjaxCall()
-            }
-        },
-
-        loadCoursesSuccess(courses) {
-//            console.log('loadCoursesSuccess mock', courses);
-            return { type: types.LOAD_COURSES_SUCCESS, courses };
-        },
-
-//        loadCoursesSuccess(cb) {
-//            console.log('loadCoursesSuccess cb', cb);
-//            setTimeout(() => {
-////                console.log('loadCoursesSuccess', loadCoursesSuccess);
-//                if (cb) {
-//                    console.log('calling success with cb');
-//                    // TODO how do i dispatch the action returned here? !!!
-//                    cb(function() { dispatch(loadCoursesSuccess())}) // cb should send back the mocked response in a function
-//                } else {
-//                    console.log('calling success directly');
-//                    loadCoursesSuccess()
-//                }
-//            }, 100)
-//        },
-
-        loadCoursesFailure(error) {
-//            console.log('loadCoursesFailure cb', error);
-            return { type: types.LOAD_COURSES_FAILURE, error }
-//            setTimeout(() => {
-////                console.log('loadCoursesFailure', loadCoursesFailure);
-//                if (cb) cb(loadCoursesFailure())
-//                else loadCoursesFailure()
-//            }, 100)
-        }
     }
+//    ,
+//
+//    // TODO these probably don't need to be mocked then
+//    './actionCreators.js': {
+//        beginAjaxCall(cb) {
+////            console.log('beginAjaxCall cb', cb);
+//            if (cb) {
+//                setTimeout(() => {
+////                    console.log('beginAjaxCall', beginAjaxCall);
+//                    cb(beginAjaxCall())
+//                }, 100)
+//            } else {
+//                return beginAjaxCall()
+//            }
+//        },
+//
+//        loadCoursesSuccess(courses) {
+////            console.log('loadCoursesSuccess mock', courses);
+//            return { type: types.LOAD_COURSES_SUCCESS, courses };
+//        },
+//
+////        loadCoursesSuccess(cb) {
+////            console.log('loadCoursesSuccess cb', cb);
+////            setTimeout(() => {
+//////                console.log('loadCoursesSuccess', loadCoursesSuccess);
+////                if (cb) {
+////                    console.log('calling success with cb');
+////                    // TODO how do i dispatch the action returned here? !!!
+////                    cb(function() { dispatch(loadCoursesSuccess())}) // cb should send back the mocked response in a function
+////                } else {
+////                    console.log('calling success directly');
+////                    loadCoursesSuccess()
+////                }
+////            }, 100)
+////        },
+//
+//        loadCoursesFailure(error) {
+////            console.log('loadCoursesFailure cb', error);
+//            return { type: types.LOAD_COURSES_FAILURE, error }
+////            setTimeout(() => {
+//////                console.log('loadCoursesFailure', loadCoursesFailure);
+////                if (cb) cb(loadCoursesFailure())
+////                else loadCoursesFailure()
+////            }, 100)
+//        }
+//    }
 });
 
-// TODO is this needed anymore?
-const actionCreators = actionCreatorsInjector({
-
-});
+//// TODO is this needed anymore?
+//const actionCreators = actionCreatorsInjector({
+//
+//});
 
 //console.log('actions', actions);
 //console.log('actions.LOAD_COURSES! ', actions.LOAD_COURSES);

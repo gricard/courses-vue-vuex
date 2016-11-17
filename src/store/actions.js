@@ -44,12 +44,12 @@ export const actions = {
     LOAD_COURSES: ({ commit, dispatch, state }) => {
 //        console.log('BEGIN AJAX CALL');
         dispatch(beginAjaxCall()); // increment ajax call count
-        console.log('dispatched ajax call');
+//        console.log('dispatched ajax call');
         return CourseApi.getAllCourses().then(courses => {
-            console.log('LOAD_COURSES SUCCESS', courses);
+//            console.log('LOAD_COURSES SUCCESS', courses);
             dispatch(loadCoursesSuccess(courses));
         }).catch(error => {
-            console.log('LOAD_COURSES FAILURE: ' + error);
+//            console.log('LOAD_COURSES FAILURE: ' + error);
             dispatch(loadCoursesFailure(error));
         });
     },
