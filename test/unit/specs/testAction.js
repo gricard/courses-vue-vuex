@@ -18,14 +18,15 @@ export function testAction(action, args, state, expectedMutations, expectedActio
 //        console.log('expecting ', name);
         if (typeof name === 'object') {
 //            console.log('got object', name);
-            const type = null;
+            // I'm not sure why, but this function wasn't called correctly and ended up with the args in the first one
+            // so we need to split out the first arg into name and the rest into payload like it should be
             payload = name;
             name = name.type;
             delete payload["type"];
             payload = {...payload};
         }
 //        console.log('expecting ', name);
-        expect(action.name).to.equal(name);
+        expect(action.name, 'Action name').to.equal(name);
 //        console.log('action expected', action.name);
 //        console.log('action received', name);
 
@@ -34,7 +35,7 @@ export function testAction(action, args, state, expectedMutations, expectedActio
         if (payload && action.payload) {
 //            console.log('payload expected', action.payload);
 //            console.log('payload received', payload);
-            expect(action.payload).to.deep.equal(payload);
+            expect(action.payload, 'Action payload').to.deep.equal(payload);
         }
 
         actionsCount++;
@@ -65,7 +66,7 @@ export function testAction(action, args, state, expectedMutations, expectedActio
 //            name = name.type;
 //        }
 
-        expect(mutation.type).to.equal(name);
+        expect(mutation.type, 'Mutation type').to.equal(name);
 //        console.log('mutation expected', mutation.type);
 //        console.log('mutation received', name);
 //        console.log('mutation', mutation);
@@ -74,7 +75,7 @@ export function testAction(action, args, state, expectedMutations, expectedActio
         // if our mutation has a payload and our expected mutation
         // wants us to assert this payload.
         if (payload && mutation.payload) {
-            expect(mutation.payload).to.deep.equal(payload);
+            expect(mutation.payload, 'Mutation payload').to.deep.equal(payload);
 //            console.log('payload expected', mutation.payload);
 //            console.log('payload received', payload);
         }
@@ -101,18 +102,20 @@ export function testAction(action, args, state, expectedMutations, expectedActio
 //        console.log('mutationsCount', mutationsCount);
 
         // check if no mutations should have been dispatched
-        if (expectedActions.length === 0) {
-            expect(actionsCount).to.equal(0);
-        } else {
-            expect(actionsCount).to.equal(expectedActions.length);
-        }
+            if (expectedActions.length === 0) {
+                expect(actionsCount, '# actions').to.equal(0);
+            } else {
+                expect(actionsCount, '# actions').to.equal(expectedActions.length);
+            }
+
 
         // check if no mutations should have been dispatched
-        if (expectedMutations.length === 0) {
-            expect(mutationsCount).to.equal(0);
-        } else {
-            expect(mutationsCount).to.equal(expectedMutations.length);
-        }
+            if (expectedMutations.length === 0) {
+                expect(mutationsCount, '# mutations').to.equal(0);
+            } else {
+                expect(mutationsCount, '# mutations').to.equal(expectedMutations.length);
+            }
+
 
         done();
     };
