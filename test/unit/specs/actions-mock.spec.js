@@ -4,9 +4,10 @@
 // with inject-loader, this returns a module factory
 // that allows us to inject mocked dependencies.
 const actionsInjector = require('inject!src/store/actions');
-const actionCreatorsInjector = require('inject!src/store/actionCreators');
+const actionCreatorsInjector = require('inject!src/store/actionCreators'); // TODO is this needed anymore?
 
 import { beginAjaxCall, loadCourses, loadCoursesSuccess, loadCoursesFailure } from 'src/store/actionCreators';
+import * as types from 'src/store/actionTypes';
 
 import {testAction} from './testAction';
 import store from 'src/store/store';
@@ -38,23 +39,25 @@ const courses = [
 const actions = actionsInjector({
     '../api/mockCourseApi': {
         getAllCourses (cb) {
-//            console.log('mock getAllCourses called', arguments);
+            console.log('mock getAllCourses called', arguments);
             //      setTimeout(() => {
             //        cb(Object.assign([], courses))
             //      }, 100)
 
             return new Promise((resolve, reject) => {
-                setTimeout(() => {
+                console.log('executing courses promise');
+//                setTimeout(() => {
                     //        reject("cannot load courses");
                     //resolve(Object.assign([], courses));
+                    console.log('resolving with', courses);
                     resolve(courses)
-                }, 100);
+//                }, 100);
             });
         }
     },
     './actionCreators.js': {
         beginAjaxCall(cb) {
-//            console.log('beginAjaxCall cb', cb);
+            console.log('beginAjaxCall cb', cb);
             if (cb) {
                 setTimeout(() => {
 //                    console.log('beginAjaxCall', beginAjaxCall);
@@ -63,27 +66,41 @@ const actions = actionsInjector({
             } else {
                 return beginAjaxCall()
             }
+        },
 
+        loadCoursesSuccess(courses) {
+            console.log('loadCoursesSuccess mock', courses);
+            return { type: types.LOAD_COURSES_SUCCESS, courses };
         },
-        loadCoursesSuccess(cb) {
+
+//        loadCoursesSuccess(cb) {
 //            console.log('loadCoursesSuccess cb', cb);
-            setTimeout(() => {
-//                console.log('loadCoursesSuccess', loadCoursesSuccess);
-                if (cb) cb(loadCoursesSuccess())
-                else loadCoursesSuccess()
-            }, 100)
-        },
-        loadCoursesFailure(cb) {
-//            console.log('loadCoursesFailure cb', cb);
-            setTimeout(() => {
-//                console.log('loadCoursesFailure', loadCoursesFailure);
-                if (cb) cb(loadCoursesFailure())
-                else loadCoursesFailure()
-            }, 100)
+//            setTimeout(() => {
+////                console.log('loadCoursesSuccess', loadCoursesSuccess);
+//                if (cb) {
+//                    console.log('calling success with cb');
+//                    // TODO how do i dispatch the action returned here? !!!
+//                    cb(function() { dispatch(loadCoursesSuccess())}) // cb should send back the mocked response in a function
+//                } else {
+//                    console.log('calling success directly');
+//                    loadCoursesSuccess()
+//                }
+//            }, 100)
+//        },
+
+        loadCoursesFailure(error) {
+            console.log('loadCoursesFailure cb', error);
+            return { type: types.LOAD_COURSES_FAILURE, error }
+//            setTimeout(() => {
+////                console.log('loadCoursesFailure', loadCoursesFailure);
+//                if (cb) cb(loadCoursesFailure())
+//                else loadCoursesFailure()
+//            }, 100)
         }
     }
 });
 
+// TODO is this needed anymore?
 const actionCreators = actionCreatorsInjector({
 
 });
@@ -141,25 +158,27 @@ const actionCreators = actionCreatorsInjector({
 
 describe('Complex Mocked/Injected Actions', () => {
     describe('LOAD_COURSES', () => {
-        it('Should dispatch actions and commit mutations', done => {
+        it('Should dispatch actions and commit mutations', (done) => {
             const courseList = Object.assign([], courses);
             const loadError = {error: 'no error'};
 
     //        console.log('LOAD_COURSES', actions.actions.LOAD_COURSES);
             testAction(actions.actions.LOAD_COURSES, null, state, [
-                    { type: 'INCREMENT_AJAX_CALLS' },
-                    { type: 'SET_COURSES', payload: courseList },
-                    { type: 'DECREMENT_AJAX_CALLS' }
+//                    { type: 'INCREMENT_AJAX_CALLS' },
+//                    { type: 'SET_COURSES', payload: courseList },
+//                    { type: 'DECREMENT_AJAX_CALLS' }
                 ], [
-                    { name: 'BEGIN_AJAX_CALL' }
-                    // no actions expected
+                    { name: 'BEGIN_AJAX_CALL' },
+                    { name: 'LOAD_COURSES_SUCCESS', payload: { courses: courseList}}
                 ],
                 done
-            ).then(nothing => {
-                console.log('promise done');
-            }).catch(error => {
-                console.log('caught error', error);
-            });
+            )
+//                .then(nothing => {
+//                console.log('promise done');
+//            }).catch(error => {
+//                console.log('caught error', error);
+//            })
+            ;
         })
     })
 })
