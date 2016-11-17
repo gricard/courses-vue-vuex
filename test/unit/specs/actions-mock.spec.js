@@ -164,23 +164,27 @@ describe('Complex Mocked/Injected Actions', () => {
         it('Should dispatch actions and commit mutations', (done) => {
             const courseList = Object.assign([], courses);
 
-    //        console.log('LOAD_COURSES', actions.actions.LOAD_COURSES);
             testAction(actions.actions.LOAD_COURSES, null, state, [
-//                    { type: 'INCREMENT_AJAX_CALLS' },
-//                    { type: 'SET_COURSES', payload: courseList },
-//                    { type: 'DECREMENT_AJAX_CALLS' }
+                    // no direct mutations
                 ], [
                     { name: 'BEGIN_AJAX_CALL' },
                     { name: 'LOAD_COURSES_SUCCESS', payload: { courses: courseList}}
                 ],
                 done
             )
-//                .then(nothing => {
-//                console.log('promise done');
-//            }).catch(error => {
-//                console.log('caught error', error);
-//            })
             ;
+        })
+    })
+
+    describe('BEGIN_AJAX_CALL', () => {
+        it('Should commit INCREMENT_AJAX_CALLS mutation', (done) => {
+            testAction(actions.actions.BEGIN_AJAX_CALL, null, state, [
+                    { type: 'INCREMENT_AJAX_CALLS' },
+                ], [
+                    // no actions
+                ],
+                done
+            );
         })
     })
 })
