@@ -163,7 +163,6 @@ describe('Complex Mocked/Injected Actions', () => {
     describe('LOAD_COURSES', () => {
         it('Should dispatch actions and commit mutations', (done) => {
             const courseList = Object.assign([], courses);
-            const loadError = {error: 'no error'};
 
     //        console.log('LOAD_COURSES', actions.actions.LOAD_COURSES);
             testAction(actions.actions.LOAD_COURSES, null, state, [
