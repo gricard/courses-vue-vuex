@@ -96,7 +96,7 @@ export function testAction(action, args, state, expectedMutations, expectedActio
 //        }
     };
 
-    const checkResults = (where, actionsCount, mutationsCount) => {
+    const checkResults = (where) => {
 //        console.log('checking results from ' + where);
 //        console.log('actionsCount', actionsCount);
 //        console.log('mutationsCount', mutationsCount);
@@ -127,12 +127,12 @@ export function testAction(action, args, state, expectedMutations, expectedActio
 //            console.log('actionsCount', actionsCount);
 //            console.log('mutationsCount', mutationsCount);
             setTimeout(function() {
-                checkResults('promise success', actionsCount, mutationsCount);
+                checkResults('promise success');
             }, 100);
         }).catch(error => {
 //            console.log('action failed', error);
             setTimeout(function() {
-                checkResults('promise failure', actionsCount, mutationsCount);
+                checkResults('promise failure');
             }, 100);
         });
     } else {
@@ -141,16 +141,16 @@ export function testAction(action, args, state, expectedMutations, expectedActio
             retVal.catch(error => {
 //                console.log('returned promise failed', error);
                 setTimeout(function() {
-                    checkResults('returned promise failure', actionsCount, mutationsCount);
+                    checkResults('returned promise failure');
                 }, 100);
             }).then(nothing => {
 //                console.log('action finished');
                 setTimeout(function() {
-                    checkResults('returned promise success', actionsCount, mutationsCount);
+                    checkResults('returned promise success');
                 }, 100);
             });
         } else {
-            checkResults('direct call', actionsCount, mutationsCount);
+            checkResults('direct call');
         }
     }
 //
