@@ -11,36 +11,36 @@ export function testAction(action, args, state, expectedMutations, expectedActio
 
     // mock dispatch
     const dispatch = (name, ...payload) => {
-        console.log('dispatch', arguments);
+//        console.log('dispatch', arguments);
         const action = expectedActions[actionsCount];
-        console.log('next action', action);
-        console.log('action #' + actionsCount)
+//        console.log('next action', action);
+//        console.log('action #' + actionsCount)
 
-        console.log('expecting ', name);
+//        console.log('expecting ', name);
         if (typeof name === 'object') {
-            console.log('got object', name);
+//            console.log('got object', name);
             const type = null;
             payload = name;
             name = name.type;
             delete payload["type"];
             payload = {...payload};
         }
-        console.log('expecting ', name);
+//        console.log('expecting ', name);
         expect(action.name).to.equal(name);
-        console.log('action expected', action.name);
-        console.log('action received', name);
+//        console.log('action expected', action.name);
+//        console.log('action received', name);
 
         // if our mutation has a payload and our expected mutation
         // wants us to assert this payload.
         if (payload && action.payload) {
-            console.log('payload expected', action.payload);
-            console.log('payload received', payload);
+//            console.log('payload expected', action.payload);
+//            console.log('payload received', payload);
             expect(action.payload).to.deep.equal(payload);
         }
 
         actionsCount++;
 
-        console.log('____ACTIONS_COUNT_____', actionsCount);
+//        console.log('____ACTIONS_COUNT_____', actionsCount);
 
         // TODO where does the return value end up?
         // TODO and how do we get that and execute further actions that are triggered?
@@ -67,8 +67,8 @@ export function testAction(action, args, state, expectedMutations, expectedActio
 //        }
 
         expect(mutation.type).to.equal(name);
-        console.log('mutation expected', mutation.type);
-        console.log('mutation received', name);
+//        console.log('mutation expected', mutation.type);
+//        console.log('mutation received', name);
 //        console.log('mutation', mutation);
 //        console.log('payload', payload);
 
@@ -76,12 +76,12 @@ export function testAction(action, args, state, expectedMutations, expectedActio
         // wants us to assert this payload.
         if (payload && mutation.payload) {
             expect(mutation.payload).to.deep.equal(payload);
-            console.log('payload expected', mutation.payload);
-            console.log('payload received', payload);
+//            console.log('payload expected', mutation.payload);
+//            console.log('payload received', payload);
         }
 
         mutationsCount++;
-        console.log('# mutations = ' + mutationsCount);
+//        console.log('# mutations = ' + mutationsCount);
 
 //        if (mutationsCount === expectedMutations.length) {
 //            console.log('mutations done');
@@ -97,9 +97,9 @@ export function testAction(action, args, state, expectedMutations, expectedActio
     };
 
     const checkResults = (where, actionsCount, mutationsCount) => {
-        console.log('checking results from ' + where);
-        console.log('actionsCount', actionsCount);
-        console.log('mutationsCount', mutationsCount);
+//        console.log('checking results from ' + where);
+//        console.log('actionsCount', actionsCount);
+//        console.log('mutationsCount', mutationsCount);
 
         // check if no mutations should have been dispatched
         if (expectedActions.length === 0) {
@@ -122,15 +122,15 @@ export function testAction(action, args, state, expectedMutations, expectedActio
 //    console.log('args again', args);
     if ('object' === typeof action && 'function' === typeof action.then) {
         action({commit, dispatch, state}, args).then(nothing => {
-                    console.log('action finished');
+//            console.log('action finished');
 
-            console.log('actionsCount', actionsCount);
-            console.log('mutationsCount', mutationsCount);
+//            console.log('actionsCount', actionsCount);
+//            console.log('mutationsCount', mutationsCount);
             setTimeout(function() {
                 checkResults('promise success', actionsCount, mutationsCount);
             }, 100);
         }).catch(error => {
-            console.log('action failed', error);
+//            console.log('action failed', error);
             setTimeout(function() {
                 checkResults('promise failure', actionsCount, mutationsCount);
             }, 100);
@@ -139,12 +139,12 @@ export function testAction(action, args, state, expectedMutations, expectedActio
         const retVal = action({commit, dispatch, state}, args);
         if ('object' === typeof retVal && 'function' === typeof retVal.then) {
             retVal.catch(error => {
-                console.log('returned promise failed', error);
+//                console.log('returned promise failed', error);
                 setTimeout(function() {
                     checkResults('returned promise failure', actionsCount, mutationsCount);
                 }, 100);
             }).then(nothing => {
-                        console.log('action finished');
+//                console.log('action finished');
                 setTimeout(function() {
                     checkResults('returned promise success', actionsCount, mutationsCount);
                 }, 100);

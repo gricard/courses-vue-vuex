@@ -45,19 +45,21 @@ const actions = actionsInjector({
             //      }, 100)
 
             return new Promise((resolve, reject) => {
-                console.log('executing courses promise');
+//                console.log('executing courses promise');
 //                setTimeout(() => {
                     //        reject("cannot load courses");
                     //resolve(Object.assign([], courses));
-                    console.log('resolving with', courses);
+//                    console.log('resolving with', courses);
                     resolve(courses)
 //                }, 100);
             });
         }
     },
+
+    // TODO these probably don't need to be mocked then
     './actionCreators.js': {
         beginAjaxCall(cb) {
-            console.log('beginAjaxCall cb', cb);
+//            console.log('beginAjaxCall cb', cb);
             if (cb) {
                 setTimeout(() => {
 //                    console.log('beginAjaxCall', beginAjaxCall);
@@ -69,7 +71,7 @@ const actions = actionsInjector({
         },
 
         loadCoursesSuccess(courses) {
-            console.log('loadCoursesSuccess mock', courses);
+//            console.log('loadCoursesSuccess mock', courses);
             return { type: types.LOAD_COURSES_SUCCESS, courses };
         },
 
@@ -89,7 +91,7 @@ const actions = actionsInjector({
 //        },
 
         loadCoursesFailure(error) {
-            console.log('loadCoursesFailure cb', error);
+//            console.log('loadCoursesFailure cb', error);
             return { type: types.LOAD_COURSES_FAILURE, error }
 //            setTimeout(() => {
 ////                console.log('loadCoursesFailure', loadCoursesFailure);
