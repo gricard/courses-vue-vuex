@@ -1,12 +1,19 @@
-# vue-project
+# courses-vue-vuex
 
-> A Vue.js project
+> A VueJS 2 / vuex / vue-router project
+
+This is an implementation of [a react/redux application I made](https://github.com/sumorai/courses-react-redux) while participating in [Corey House](https://github.com/coryhouse)'s excellent [React/Redux course on Pluralsight](https://www.pluralsight.com/courses/react-redux-react-router-es6). 
+After I finished the react/redux course, VueJS caught my interest and I decided to implement the same application in VueJS instead.
 
 ## Build Setup
 
 ``` bash
 # install dependencies
-npm install
+npm install 
+
+     OR 
+
+yarn install
 
 # serve with hot reload at localhost:8080
 npm run dev
@@ -21,4 +28,6 @@ npm run unit
 npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Note: This is not a real, full application. It was just an educational exercise. I'm making it public only because it could be helpful to others.
+
+I have no offiliation with Pluralsight.
