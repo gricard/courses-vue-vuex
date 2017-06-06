@@ -23,7 +23,6 @@
 
         props: {
             label: String,
-            wrapperClass: String,
             fieldName: String,
             value: String,
             onChange: Function,
@@ -33,9 +32,6 @@
         },
 
         computed: {
-            wrapperClass: function() {
-                return this.wrapperClass;
-            },
 
             labelFor: function() {
                 return this.fieldName;

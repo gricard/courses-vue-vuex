@@ -1,8 +1,8 @@
 // based on http://www.slideshare.net/coulix/vuejs-testing
 
 
-import { actions } from 'src/store/actions';
-import store from 'src/store/store';
+import { actions } from '@/store/actions';
+import store from '@/store/store';
 const state = store.state;
 import {testAction} from './testAction';
 //

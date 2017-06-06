@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import 'babel-polyfill'
-import AuthorForm from 'src/components/AuthorForm'
-import TextInput from 'src/components/common/TextInput'
-import SelectInput from 'src/components/common/SelectInput'
+import AuthorForm from '@/components/AuthorForm'
+import TextInput from '@/components/common/TextInput'
+import SelectInput from '@/components/common/SelectInput'
 
 // register global components
 Vue.component('TextInput', TextInput);

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import 'babel-polyfill'
-import { mutations } from 'src/store/mutations';
+import { mutations } from '@/store/mutations';
 
 
 // destructure assign mutations

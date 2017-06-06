@@ -1,5 +1,5 @@
 <template>
-    <span>{{loadingDots}}&nbsp;</span>;
+    <span>{{loadingDots}}&nbsp;</span>
 </template>
 
 <script>

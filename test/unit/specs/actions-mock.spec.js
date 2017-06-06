@@ -3,14 +3,14 @@
 // use require syntax for inline loaders.
 // with inject-loader, this returns a module factory
 // that allows us to inject mocked dependencies.
-const actionsInjector = require('inject!src/store/actions');
-//const actionCreatorsInjector = require('inject!src/store/actionCreators'); // TODO is this needed anymore?
+const actionsInjector = require('inject-loader!@/store/actions');
+//const actionCreatorsInjector = require('inject-loader!@/store/actionCreators'); // TODO is this needed anymore?
 
-import { beginAjaxCall, loadCourses, loadCoursesSuccess, loadCoursesFailure } from 'src/store/actionCreators';
-import * as types from 'src/store/actionTypes';
+import { beginAjaxCall, loadCourses, loadCoursesSuccess, loadCoursesFailure } from '@/store/actionCreators';
+import * as types from '@/store/actionTypes';
 
 import {testAction} from './testAction';
-import store from 'src/store/store';
+import store from '@/store/store';
 const state = store.state;
 
 //console.log('actionsInjector', actionsInjector);
