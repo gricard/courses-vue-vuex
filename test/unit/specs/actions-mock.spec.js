@@ -18,20 +18,20 @@ const state = store.state;
 
 const courses = [
     {
-        id: "react-flux-building-applications",
-        title: "Building Applications in React and Flux",
-        watchHref: "http://www.pluralsight.com/courses/react-flux-building-applications",
-        authorId: "cory-house",
-        length: "5:08",
-        category: "JavaScript"
+        id: 'react-flux-building-applications',
+        title: 'Building Applications in React and Flux',
+        watchHref: 'http://www.pluralsight.com/courses/react-flux-building-applications',
+        authorId: 'cory-house',
+        length: '5:08',
+        category: 'JavaScript'
     },
     {
-        id: "clean-code",
-        title: "Clean Code: Writing Code for Humans",
-        watchHref: "http://www.pluralsight.com/courses/writing-clean-code-humans",
-        authorId: "cory-house",
-        length: "3:10",
-        category: "Software Practices"
+        id: 'clean-code',
+        title: 'Clean Code: Writing Code for Humans',
+        watchHref: 'http://www.pluralsight.com/courses/writing-clean-code-humans',
+        authorId: 'cory-house',
+        length: '3:10',
+        category: 'Software Practices'
     }
 ];
 
@@ -47,7 +47,7 @@ const actions = actionsInjector({
             return new Promise((resolve, reject) => {
 //                console.log('executing courses promise');
 //                setTimeout(() => {
-                    //        reject("cannot load courses");
+                    //        reject('cannot load courses');
                     //resolve(Object.assign([], courses));
 //                    console.log('resolving with', courses);
                     resolve(courses)

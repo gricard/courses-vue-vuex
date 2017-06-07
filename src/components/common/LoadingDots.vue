@@ -18,12 +18,12 @@
         // get these props from parent
         props: {
             interval: {
-                "type": [Number, String],
-                "default": 300
+                'type': [Number, String],
+                'default': 300
             },
             dots: {
-                "type": [Number, String],
-                "default": 3
+                'type': [Number, String],
+                'default': 3
             }
         },
 
