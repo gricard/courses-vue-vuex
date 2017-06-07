@@ -77,14 +77,14 @@
                 let formIsValid = true;
                 const errors = this.$store.state.errors || {};
 
-                if (this.$store.state.author.firstName && this.$store.state.author.firstName.length < 3) {
+                if (!this.$store.state.author.firstName || this.$store.state.author.firstName.length < 3) {
                     errors.firstName = 'First name must be at least 3 characters.';
                     formIsValid = false;
                 } else {
                     delete errors["firstName"];
                 }
 
-                if (this.$store.state.author.lastName && this.$store.state.author.lastName.length < 3) {
+                if (!this.$store.state.author.lastName || this.$store.state.author.lastName.length < 3) {
                     errors.lastName = 'Last name must be at least 3 characters.';
                     formIsValid = false;
                 } else {
