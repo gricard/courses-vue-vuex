@@ -16,7 +16,7 @@
 
         props: {
             course: Object,
-            key: String,
+            courseKey: String,
             authors: [Array, Object] // TODO Fixme
         },
 

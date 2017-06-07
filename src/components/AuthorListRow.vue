@@ -15,7 +15,7 @@
 
         props: {
             author: Object,
-            key: String
+            authorKey: String
         },
 
         computed: {
