@@ -27,3 +27,5 @@ FEATURES:
 - vue-focus     https://github.com/simplesmiler/vue-focus
 
 
+- check that fields actually changed before allowing saves
+
