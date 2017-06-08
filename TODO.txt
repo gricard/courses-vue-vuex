@@ -5,9 +5,10 @@ BUGS:
 
   maybe dispatch an action like 'AUTHOR_DELETED' from the 'DELETE_AUTHOR' mutation and then the form can use that to update the list
 
-- saving/deleting a course and then being redirected back to the course list results in a slow load of course list to update it
-  need to make this seamless
+- refresh author list after deleting, BEFORE navigating back to it so the user doesn't see the record disappear
+    - same for course page
 
+- header links stay in mouse-down state after clicked
 
 FEATURES:
 
@@ -28,6 +29,4 @@ FEATURES:
 
 
 - check that fields actually changed before allowing saves
-
-- refresh author list after deleting, BEFORE navigating back to it so the user doesn't see the record disappear
-    - same for course page
+    - track original values
