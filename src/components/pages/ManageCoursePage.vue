@@ -146,13 +146,16 @@
             },
 
             handleDeleteCourse(event) {
-                this.$store.dispatch('DELETE_COURSE', this.$store.state.course)
-                    .then(course => {
-                        this.redirect();
-                    })
-                    .catch(error => {
-                        toastr.error(error);
-                    });
+                let result = window.confirm('Are you sure you want to delete this course?');
+                if (result) {
+                    this.$store.dispatch('DELETE_COURSE', this.$store.state.course)
+                        .then(course => {
+                            this.redirect();
+                        })
+                        .catch(error => {
+                            toastr.error(error);
+                        });
+                }
             }
         },
 

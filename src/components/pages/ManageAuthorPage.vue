@@ -126,13 +126,16 @@
             },
 
             handleDeleteAuthor(event) {
-                this.$store.dispatch('DELETE_AUTHOR', this.$store.state.author)
-                    .then(author => {
-                        this.redirect();
-                    })
-                    .catch(error => {
-                        toastr.error(error);
-                    });
+                let result = window.confirm('Are you sure you want to delete this author?');
+                if (result) {
+                    this.$store.dispatch('DELETE_AUTHOR', this.$store.state.author)
+                        .then(author => {
+                            this.redirect();
+                        })
+                        .catch(error => {
+                            toastr.error(error);
+                        });
+                }
             }
         },
 

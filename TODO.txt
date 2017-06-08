@@ -29,3 +29,5 @@ FEATURES:
 
 - check that fields actually changed before allowing saves
 
+- refresh author list after deleting, BEFORE navigating back to it so the user doesn't see the record disappear
+    - same for course page
