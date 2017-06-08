@@ -54,7 +54,7 @@
             type="submit"
             :disabled="deleting || !course.id"
             :value="deleting ? 'Deleting...' : 'Delete'"
-            class="btn deleter"
+            class="btn btn-danger deleter"
             @click.prevent="onDelete"
         />
 

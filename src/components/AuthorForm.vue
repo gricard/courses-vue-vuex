@@ -37,7 +37,7 @@
                 type="submit"
                 :disabled="deleting || !author.id"
                 :value="deleting ? 'Deleting...' : 'Delete'"
-                class="btn deleter"
+                class="btn btn-danger deleter"
                 @click.prevent="onDelete"
             />
 
