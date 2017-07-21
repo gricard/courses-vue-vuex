@@ -97,7 +97,7 @@
                     delete errors['length'];
                 }
 
-                if (!this.$store.state.course.length || !this.$store.state.course.length.match(/[0-9\;]/)  ) {
+                if (!this.$store.state.course.length || !this.$store.state.course.length.match(/[0-9:]/)  ) {
                     errors.length = 'Length must be in the format HH:MM.';
                     formIsValid = false;
                 } else {
