@@ -14,10 +14,22 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'sinon-chai', 'phantomjs-shim'],
     reporters: ['spec', 'coverage'],
-    files: ['./index.js'],
-    preprocessors: {
-      './index.js': ['webpack', 'coverage', 'sourcemap']
-    },
+    // old style of testing entire bundle
+    // files: ['./index.js'],
+    // preprocessors: {
+    //   './index.js': ['webpack', 'coverage', 'sourcemap']
+    // },
+
+      files: [
+          '../../src/**/*.js',
+          '../../src/**/*.vue',
+          '../../test/unit/**/*.spec.js'
+      ],
+      preprocessors: {
+          '../../src/**/*.js': [ 'webpack', 'coverage', 'sourcemap'],
+          '../../src/**/*.vue': [ 'webpack', 'coverage', 'sourcemap'],
+          '../../test/unit/**/*.spec.js': [ 'webpack', 'coverage', 'sourcemap']
+      },
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true,
@@ -25,8 +37,16 @@ module.exports = function (config) {
     coverageReporter: {
       dir: './coverage',
       reporters: [
-        { type: 'lcov', subdir: '.' },
-        { type: 'text-summary' },
+        {
+            type: 'lcov',
+            subdir: '.'
+        },
+        { type: 'text' },
+        {
+          type : 'html',
+          dir : 'coverage/'
+        }
+
       ]
     },
   });
