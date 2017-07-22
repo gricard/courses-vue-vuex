@@ -28,7 +28,7 @@ module.exports = function (config) {
       preprocessors: {
           '../../src/**/*.js': [ 'webpack', 'coverage', 'sourcemap'],
           '../../src/**/*.vue': [ 'webpack', 'coverage', 'sourcemap'],
-          '../../test/unit/**/*.spec.js': [ 'webpack', 'coverage', 'sourcemap']
+          '../../test/unit/**/*.spec.js': [ 'webpack']
       },
     webpack: webpackConfig,
     webpackMiddleware: {
