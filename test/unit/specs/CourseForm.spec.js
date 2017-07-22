@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import 'babel-polyfill'
+// import 'babel-polyfill'
 import CourseForm from '@/components/CourseForm'
 import TextInput from '@/components/common/TextInput'
 import SelectInput from '@/components/common/SelectInput'
