@@ -49,5 +49,10 @@ module.exports = function (config) {
 
       ]
     },
+    client: {
+      mocha: {
+          bail: true
+      }
+    }
   });
 };
