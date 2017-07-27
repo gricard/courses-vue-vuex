@@ -5,9 +5,6 @@ import { actions } from '@/store/actions';
 import store from '@/store/store';
 const state = store.state;
 import {testAction} from './testAction';
-//
-//console.log('actions', actions);
-//console.log('UPDATE_ERRORS', actions.UPDATE_ERRORS);
 
 describe('Simple Actions', () => {
     describe('UPDATE_ERRORS', () => {
